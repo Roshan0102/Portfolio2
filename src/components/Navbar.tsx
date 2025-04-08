@@ -19,6 +19,7 @@ const Navbar: React.FC = () => {
     { title: 'Home', to: 'home' },
     { title: 'Skills', to: 'skills' },
     { title: 'Projects', to: 'projects' },
+    { title: 'Education', to: 'education' },
     { title: 'Certifications', to: 'certifications' },
     { title: 'Internships', to: 'internships' },
   ];

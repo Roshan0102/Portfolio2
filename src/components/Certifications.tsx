@@ -21,7 +21,7 @@ const Certifications: React.FC = () => {
     {
       title: "Neural Networks and Deep Learning",
       issuer: "Coursera",
-      image: "https://img.freepik.com/free-vector/artificial-intelligence-concept-illustration_114360-7000.jpg",
+      image: "https://cdn.the-scientist.com/assets/articleNo/71687/aImg/52292/62dc0501-8dda-4bd7-9ba9-fa1a9b8c7cb4-l.jpg",
       url: "https://drive.google.com/file/d/1KVTHm4c4ertQGarQHYJUTM8ran0pY5gV/view?usp=sharing"
     },
     {
@@ -33,7 +33,7 @@ const Certifications: React.FC = () => {
     {
       title: "AWS Certified Cloud Practitioner",
       issuer: "Amazon Web Services",
-      image: "https://img.freepik.com/free-vector/cloud-computing-concept-illustration_114360-7578.jpg",
+      image: "https://images.ctfassets.net/xz1dnu24egyd/72URY4Vg59wKsYMpTqrMel/194347274767abce3c04be7be72a75a3/AWS-Logo__1_.png",
       url: "https://drive.google.com/file/d/1nVkYh26b5gI3FWBlobwYj7YkcJYyibtg/view?usp=sharing"
     }
   ];

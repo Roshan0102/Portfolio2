@@ -22,7 +22,7 @@ const Internships: React.FC = () => {
         "Developed and deployed a MERN stack project on AWS, utilizing EC2, S3 and Lambda for cloud deployment",
         "Successfully completed the AWS Cloud Practitioner certification"
       ],
-      image: "https://img.freepik.com/free-vector/web-development-programmer-engineering-coding-website-augmented-reality-interface-screens-developer-project-engineer-programming-software-application-design-cartoon-illustration_107791-3863.jpg",
+      image: "https://cdn.dribbble.com/users/1059583/screenshots/4171367/coding-freak.gif",
       url: "https://drive.google.com/file/d/184EDkrXPV7Y1ohe4gXtGFBoUeiOYsJza/view"
     },
     {
@@ -33,18 +33,20 @@ const Internships: React.FC = () => {
         "Learned Python basics, including variables, loops, functions, modules, and error handling",
         "Practiced writing programs, handling errors, and working with standard Python libraries"
       ],
-      image: "https://img.freepik.com/free-vector/programming-concept-illustration_114360-1213.jpg",
+      image: "https://cdn.dribbble.com/users/730703/screenshots/6581243/avento.gif",
       url: "https://drive.google.com/file/d/1qpzCkPtQhF5QOqQbMPxpSRZph6nirwId/view"
     },
     {
-      company: "YBI",
+      company: "Tech Solutions Inc.",
       role: "Machine Learning Intern",
-      duration: "Nov 2021 - Dec 2021",
+      duration: "June 2023 - August 2023",
       description: [
-        "Worked on various Machine Learning models for data analysis",
-        "Implemented solutions for real-world business problems using predictive analytics"
+        "Developed and deployed machine learning models for predictive analytics.",
+        "Collaborated with the data science team to preprocess and analyze large datasets.",
+        "Implemented automated data pipelines and visualization tools.",
+        "Presented findings and recommendations to stakeholders."
       ],
-      image: "https://img.freepik.com/free-vector/artificial-intelligence-concept-illustration_114360-7135.jpg",
+      image: "https://i3.wp.com/miro.medium.com/v2/resize:fit:700/1*oNQdz3-wTV8Uo_mainA8xA.gif?w=1920&resize=1920,1440&ssl=1",
       url: "https://drive.google.com/file/d/16nSyTuQS3er9hS-whxbxKMi81OfZUv0q/view"
     }
   ];

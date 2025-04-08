@@ -1,85 +1,145 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 
 interface WelcomeModalProps {
-  onClose: (visitorName?: string) => void;
+  isOpen: boolean;
+  onClose: (name?: string) => void;
 }
 
-const WelcomeModal: React.FC<WelcomeModalProps> = ({ onClose }) => {
+const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onClose }) => {
   const [name, setName] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showGreeting, setShowGreeting] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  useEffect(() => {
+    // Create audio element
+    const audio = new Audio('/greeting.mp3');
+    audio.preload = 'auto';
+    audioRef.current = audio;
 
-    try {
-      // Send notification email using Web3Forms
-      await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          access_key: '196d8c62-340f-4232-8bdf-e45c96448232',
-          subject: 'New Portfolio Visitor',
-          message: name 
-            ? `${name} is viewing your portfolio website`
-            : 'An unknown person is viewing your portfolio website',
-          from_name: name || 'Unknown Visitor'
-        })
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
+
+  const playGreeting = () => {
+    if (audioRef.current && !isMuted) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.volume = 0.5;
+      audioRef.current.play().catch(error => {
+        console.log('Audio playback failed:', error);
       });
-    } catch (error) {
-      console.error('Failed to send notification:', error);
-    } finally {
-      setIsSubmitting(false);
-      onClose(name);
     }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setShowGreeting(true);
+    playGreeting();
+    setTimeout(() => {
+      onClose(name);
+    }, 2000);
+  };
+
+  const handleSkip = () => {
+    setShowGreeting(true);
+    playGreeting();
+    setTimeout(() => {
+      onClose();
+    }, 2000);
+  };
+
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
   };
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      {isOpen && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 max-w-md w-full shadow-2xl"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4"
         >
-          <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Welcome to My Portfolio!
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">
-            I'm excited to share my work with you. Would you like to introduce yourself?
-          </p>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Your Name (Optional)"
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <div className="flex gap-3">
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            className="bg-[#1a1a2e] rounded-2xl p-8 max-w-md w-full shadow-2xl border border-[#ff2e63]/20"
+          >
+            <div className="absolute top-4 right-4">
               <button
-                type="submit"
-                disabled={isSubmitting}
-                className="flex-1 px-6 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 disabled:opacity-50"
+                onClick={toggleMute}
+                className="p-2 rounded-full hover:bg-[#ff2e63]/10 transition-colors"
               >
-                {isSubmitting ? 'Please wait...' : 'Proceed'}
-              </button>
-              <button
-                type="button"
-                onClick={() => handleSubmit({ preventDefault: () => {} } as React.FormEvent)}
-                disabled={isSubmitting}
-                className="px-6 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-300 disabled:opacity-50"
-              >
-                Skip
+                {isMuted ? (
+                  <VolumeOffIcon className="text-gray-400" />
+                ) : (
+                  <VolumeUpIcon className="text-[#ff2e63]" />
+                )}
               </button>
             </div>
-          </form>
+            
+            {!showGreeting ? (
+              <div className="text-center">
+                <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-[#ff2e63] to-[#08d9d6] bg-clip-text text-transparent">
+                  Welcome to My Portfolio!
+                </h2>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Enter your name (optional)"
+                      className="w-full px-4 py-3 rounded-xl bg-[#16213e] text-white border border-[#ff2e63]/20 focus:border-[#08d9d6] outline-none transition-colors duration-300"
+                    />
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      type="submit"
+                      className="px-6 py-3 bg-gradient-to-r from-[#ff2e63] to-[#ff2e63]/80 rounded-xl text-white font-semibold hover:shadow-lg transition-shadow duration-300"
+                    >
+                      Enter
+                    </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      type="button"
+                      onClick={handleSkip}
+                      className="px-6 py-3 bg-gradient-to-r from-[#08d9d6] to-[#08d9d6]/80 rounded-xl text-white font-semibold hover:shadow-lg transition-shadow duration-300"
+                    >
+                      Skip
+                    </motion.button>
+                  </div>
+                </form>
+              </div>
+            ) : (
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                className="text-center"
+              >
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-[#ff2e63] to-[#08d9d6] bg-clip-text text-transparent">
+                  {name ? `Welcome, ${name}!` : 'Welcome!'}
+                </h2>
+                <p className="text-gray-300 text-lg">
+                  Thank you for visiting my portfolio.
+                </p>
+              </motion.div>
+            )}
+          </motion.div>
         </motion.div>
-      </div>
+      )}
     </AnimatePresence>
   );
 };

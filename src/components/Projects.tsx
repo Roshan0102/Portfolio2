@@ -23,7 +23,7 @@ const Projects: React.FC = () => {
         "Deployed on AWS EC2 using shell scripting for automated setup and deployment."
       ],
       technologies: ["React.JS", "Node.js", "Express", "MongoDB", "AWS EC2"],
-      image: "https://img.freepik.com/free-vector/app-development-illustration_52683-47931.jpg",
+      image: "https://cdn.dribbble.com/userupload/42510164/file/original-4355ca5538cf5b1f1938e5cf837efab9.gif",
       url: "https://github.com/Roshan0102/TravelBuddy1",
       type: "github"
     },
@@ -36,7 +36,7 @@ const Projects: React.FC = () => {
         "Published in IEEE, demonstrating federated learning's effectiveness in medical imaging."
       ],
       technologies: ["Python", "TensorFlow", "CNN", "Transfer Learning", "Federated Learning"],
-      image: "https://img.freepik.com/free-vector/artificial-intelligence-concept-illustration_114360-7000.jpg",
+      image: "https://scitechdaily.com/images/3D-Brain-Illustration.gif",
       url: "https://ieeexplore.ieee.org/document/10717299",
       type: "publication"
     },
@@ -48,7 +48,7 @@ const Projects: React.FC = () => {
         "Deployed the best-performing LSTM model using Gradio for real-time predictions."
       ],
       technologies: ["Python", "LSTM", "RNN", "SARIMA", "Gradio"],
-      image: "https://img.freepik.com/free-vector/cryptocurrency-bitcoin-golden-coin-background_1017-31505.jpg",
+      image: "https://media4.giphy.com/media/RODiNw1qKHct74LACe/giphy.gif?cid=6c09b952wv5xoepwrb3mibul0e8quz6lbtrx75jwfq21ijgo&ep=v1_gifs_search&rid=giphy.gif&ct=g",
       url: "https://github.com/Roshan0102/Ethereum-Price-Forecasting-using-Deep-Learning-models",
       type: "github"
     }
@@ -64,7 +64,7 @@ const Projects: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>
+          <motion.h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Projects</motion.h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Showcasing my expertise in full-stack development, machine learning, and data science
           </p>

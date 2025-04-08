@@ -5,6 +5,7 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Certifications from './components/Certifications';
 import Internships from './components/Internships';
+import Education from './components/Education';
 import Footer from './components/Footer';
 import WelcomeModal from './components/WelcomeModal';
 import WhatsAppChat from './components/WhatsAppChat';
@@ -25,7 +26,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-primary">
-      {showModal && <WelcomeModal onClose={handleModalClose} />}
+      {showModal && <WelcomeModal isOpen={showModal} onClose={handleModalClose} />}
       
       <AnimatePresence>
         {showGreeting && (
@@ -48,6 +49,7 @@ const App: React.FC = () => {
       <Home />
       <Skills />
       <Projects />
+      <Education />
       <Certifications />
       <Internships />
       <Footer />
