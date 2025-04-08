@@ -7,32 +7,29 @@ import StarIcon from '@mui/icons-material/Star';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 
-interface Education {
-  degree: string;
-  institution: string;
-  location: string;
-  score: string;
-  duration: string;
+interface EducationItem {
   type: 'university' | 'school';
+  institution: string;
+  degree: string;
+  year: string;
+  grade?: string;
 }
 
 const Education: React.FC = () => {
-  const education: Education[] = [
+  const educationData: EducationItem[] = [
     {
-      degree: "B.Tech Artificial Intelligence and Data Science",
-      institution: "Karunya University",
-      location: "Coimbatore, India",
-      score: "CGPA: 8.20",
-      duration: "2020 - 2024",
-      type: 'university'
+      type: 'university',
+      institution: 'Karunya University',
+      degree: 'B.Tech Artificial Intelligence and Data Science',
+      year: '2021 - 2025',
+      grade: '8.5 CGPA'
     },
     {
-      degree: "Higher Secondary Education",
-      institution: "Holy Spirit Matric Hr. Sec. School",
-      location: "India",
-      score: "Percentage: 80.8%",
-      duration: "2019 - 2020",
-      type: 'school'
+      type: 'school',
+      institution: 'Holy Spirit Matric Hr. Sec. School',
+      degree: 'Higher Secondary Education',
+      year: '2019 - 2021',
+      grade: '94.8%'
     }
   ];
 
@@ -139,7 +136,7 @@ const Education: React.FC = () => {
             <div className="absolute w-2 h-2 bg-[#08d9d6] rounded-full top-[75%] -left-0.5"></div>
           </motion.div>
 
-          {education.map((edu, index) => (
+          {educationData.map((edu, index) => (
             <motion.div
               key={edu.degree}
               variants={itemVariants}
@@ -199,15 +196,15 @@ const Education: React.FC = () => {
                     <div className="space-y-4">
                       <div className="flex items-center gap-3 text-gray-300">
                         <TimelineIcon className={edu.type === 'university' ? 'text-[#ff2e63] text-2xl' : 'text-[#08d9d6] text-2xl'} />
-                        <span className="text-lg">{edu.duration}</span>
+                        <span className="text-lg">{edu.year}</span>
                       </div>
                       <div className="flex items-center gap-3 text-gray-300">
                         <LocationOnIcon className={edu.type === 'university' ? 'text-[#ff2e63] text-2xl' : 'text-[#08d9d6] text-2xl'} />
-                        <span className="text-lg">{edu.location}</span>
+                        <span className="text-lg">{edu.institution}</span>
                       </div>
                       <div className="flex items-center gap-3 text-gray-300">
                         <StarIcon className="text-yellow-400 text-2xl" />
-                        <span className="text-lg">{edu.score}</span>
+                        <span className="text-lg">{edu.grade}</span>
                       </div>
                     </div>
                   </div>
