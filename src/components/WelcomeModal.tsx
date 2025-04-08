@@ -14,10 +14,42 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ onClose }) => {
       ? `Hi ${visitorName}, welcome to my portfolio! I'm excited to share my work with you.`
       : "Hi there! Welcome to my portfolio. I'm excited to share my work with you.";
 
+    // Get all available voices
+    const voices = window.speechSynthesis.getVoices();
+    
+    // Find a male voice (preferably English)
+    const maleVoice = voices.find(
+      voice => voice.name.includes('Male') || 
+               voice.name.includes('David') || 
+               voice.name.includes('James') ||
+               voice.name.includes('John')
+    );
+
     const utterance = new SpeechSynthesisUtterance(message);
     utterance.rate = 0.9; // Slightly slower rate for better clarity
-    utterance.pitch = 1; // Normal pitch
-    window.speechSynthesis.speak(utterance);
+    utterance.pitch = 0.9; // Slightly lower pitch for male voice
+    if (maleVoice) {
+      utterance.voice = maleVoice;
+    }
+    
+    // If voices aren't loaded yet, wait for them
+    if (voices.length === 0) {
+      window.speechSynthesis.addEventListener('voiceschanged', () => {
+        const updatedVoices = window.speechSynthesis.getVoices();
+        const updatedMaleVoice = updatedVoices.find(
+          voice => voice.name.includes('Male') || 
+                   voice.name.includes('David') || 
+                   voice.name.includes('James') ||
+                   voice.name.includes('John')
+        );
+        if (updatedMaleVoice) {
+          utterance.voice = updatedMaleVoice;
+        }
+        window.speechSynthesis.speak(utterance);
+      });
+    } else {
+      window.speechSynthesis.speak(utterance);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
