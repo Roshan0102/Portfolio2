@@ -26,7 +26,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-primary">
-      {showModal && <WelcomeModal isOpen={showModal} onClose={handleModalClose} />}
+      {showModal && <WelcomeModal onClose={handleModalClose} />}
       
       <AnimatePresence>
         {showGreeting && (
