@@ -14,46 +14,77 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ onClose }) => {
       ? `Hi ${visitorName}, welcome to my portfolio! I'm excited to share my work with you.`
       : "Hi there! Welcome to my portfolio. I'm excited to share my work with you.";
 
-    // Get all available voices
-    const voices = window.speechSynthesis.getVoices();
-    
     // Function to check if a voice is male (avoiding female voices)
     const isMaleVoice = (voice: SpeechSynthesisVoice) => {
       const name = voice.name.toLowerCase();
-      // Check for male indicators
-      const maleIndicators = ['male', 'man', 'guy', 'boy', 'david', 'james', 'john', 'paul', 'george'];
+      const lang = voice.lang.toLowerCase();
+      
+      // Comprehensive list of male voice indicators
+      const maleIndicators = [
+        'male', 'man', 'guy', 'boy',
+        'david', 'james', 'john', 'paul', 'george', 'thomas',
+        'microsoft david', 'google uk english male',
+        'daniel', 'fred', 'alex', 'bruce', 'junior', 'ralph',
+        'reed', 'tom', 'mike', 'sam'
+      ];
+      
+      // Comprehensive list of female voice indicators to exclude
+      const femaleIndicators = [
+        'female', 'woman', 'girl', 'lady',
+        'zira', 'microsoft eva', 'victoria', 'susan',
+        'samantha', 'karen', 'moira', 'tessa', 'monica',
+        'microsoft hazel', 'microsoft zira', 'google uk english female',
+        'alice', 'ellen', 'martha', 'veena', 'fiona'
+      ];
+
+      // Check for explicit male/female markers in the voice name
       const hasMaleIndicator = maleIndicators.some(indicator => name.includes(indicator));
-      
-      // Check for female indicators to exclude
-      const femaleIndicators = ['female', 'woman', 'girl', 'zira', 'microsoft eva'];
       const hasFemaleIndicator = femaleIndicators.some(indicator => name.includes(indicator));
-      
-      // Return true only if it has male indicators and no female indicators
-      return hasMaleIndicator && !hasFemaleIndicator;
+
+      // Additional checks for mobile devices
+      const isKnownMaleVoice = (
+        name.includes('uk english male') ||
+        name.includes('us english male') ||
+        name.includes('microsoft david') ||
+        (name.includes('english') && name.includes('male'))
+      );
+
+      return (hasMaleIndicator || isKnownMaleVoice) && !hasFemaleIndicator;
     };
 
-    // Find a male voice
-    const maleVoice = voices.find(isMaleVoice);
+    const setupVoice = (availableVoices: SpeechSynthesisVoice[]) => {
+      const utterance = new SpeechSynthesisUtterance(message);
+      
+      // Find a male voice
+      const maleVoice = availableVoices.find(isMaleVoice);
+      
+      // Configure voice settings
+      utterance.rate = 0.9; // Slightly slower rate for better clarity
+      utterance.pitch = 0.9; // Slightly lower pitch for male voice
+      
+      if (maleVoice) {
+        utterance.voice = maleVoice;
+        console.log('Selected voice:', maleVoice.name); // For debugging
+      } else {
+        // If no male voice found, try to set a neutral voice with male characteristics
+        utterance.pitch = 0.8; // Even lower pitch to ensure masculine sound
+      }
+      
+      window.speechSynthesis.speak(utterance);
+    };
 
-    const utterance = new SpeechSynthesisUtterance(message);
-    utterance.rate = 0.9; // Slightly slower rate for better clarity
-    utterance.pitch = 0.9; // Slightly lower pitch for male voice
-    if (maleVoice) {
-      utterance.voice = maleVoice;
-    }
+    // Get available voices
+    const voices = window.speechSynthesis.getVoices();
     
-    // If voices aren't loaded yet, wait for them
-    if (voices.length === 0) {
+    // If voices are available immediately
+    if (voices.length > 0) {
+      setupVoice(voices);
+    } else {
+      // Wait for voices to be loaded (especially important for mobile)
       window.speechSynthesis.addEventListener('voiceschanged', () => {
         const updatedVoices = window.speechSynthesis.getVoices();
-        const updatedMaleVoice = updatedVoices.find(isMaleVoice);
-        if (updatedMaleVoice) {
-          utterance.voice = updatedMaleVoice;
-        }
-        window.speechSynthesis.speak(utterance);
-      });
-    } else {
-      window.speechSynthesis.speak(utterance);
+        setupVoice(updatedVoices);
+      }, { once: true }); // Ensure the event listener is called only once
     }
   };
 
