@@ -57,19 +57,16 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ onClose }) => {
       // Find a male voice
       const maleVoice = availableVoices.find(isMaleVoice);
       
-      // Configure voice settings
-      utterance.rate = 0.9; // Slightly slower rate for better clarity
-      utterance.pitch = 0.9; // Slightly lower pitch for male voice
-      
+      // Only proceed with speech if a male voice is found
       if (maleVoice) {
         utterance.voice = maleVoice;
+        utterance.rate = 0.9; // Slightly slower rate for better clarity
+        utterance.pitch = 0.9; // Slightly lower pitch for male voice
         console.log('Selected voice:', maleVoice.name); // For debugging
+        window.speechSynthesis.speak(utterance);
       } else {
-        // If no male voice found, try to set a neutral voice with male characteristics
-        utterance.pitch = 0.8; // Even lower pitch to ensure masculine sound
+        console.log('No male voice found, skipping audio playback');
       }
-      
-      window.speechSynthesis.speak(utterance);
     };
 
     // Get available voices
