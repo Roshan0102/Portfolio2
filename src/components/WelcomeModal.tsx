@@ -8,90 +8,24 @@ interface WelcomeModalProps {
 
 const WelcomeModal: React.FC<WelcomeModalProps> = ({ onClose }) => {
   const [name, setName] = useState('');
+  const [audio] = useState(new Audio('/greeting.mp3'));
 
-  const speakGreeting = (visitorName?: string) => {
-    const message = visitorName
-      ? `Hi ${visitorName}, welcome to my portfolio! I'm excited to share my work with you.`
-      : "Hi there! Welcome to my portfolio. I'm excited to share my work with you.";
-
-    // Function to check if a voice is male (avoiding female voices)
-    const isMaleVoice = (voice: SpeechSynthesisVoice) => {
-      const name = voice.name.toLowerCase();
-      
-      // Comprehensive list of male voice indicators
-      const maleIndicators = [
-        'male', 'man', 'guy', 'boy',
-        'david', 'james', 'john', 'paul', 'george', 'thomas',
-        'microsoft david', 'google uk english male',
-        'daniel', 'fred', 'alex', 'bruce', 'junior', 'ralph',
-        'reed', 'tom', 'mike', 'sam'
-      ];
-      
-      // Comprehensive list of female voice indicators to exclude
-      const femaleIndicators = [
-        'female', 'woman', 'girl', 'lady',
-        'zira', 'microsoft eva', 'victoria', 'susan',
-        'samantha', 'karen', 'moira', 'tessa', 'monica',
-        'microsoft hazel', 'microsoft zira', 'google uk english female',
-        'alice', 'ellen', 'martha', 'veena', 'fiona'
-      ];
-
-      // Check for explicit male/female markers in the voice name
-      const hasMaleIndicator = maleIndicators.some(indicator => name.includes(indicator));
-      const hasFemaleIndicator = femaleIndicators.some(indicator => name.includes(indicator));
-
-      // Additional checks for mobile devices
-      const isKnownMaleVoice = (
-        name.includes('uk english male') ||
-        name.includes('us english male') ||
-        name.includes('microsoft david') ||
-        (name.includes('english') && name.includes('male'))
-      );
-
-      return (hasMaleIndicator || isKnownMaleVoice) && !hasFemaleIndicator;
-    };
-
-    const setupVoice = (availableVoices: SpeechSynthesisVoice[]) => {
-      const utterance = new SpeechSynthesisUtterance(message);
-      
-      // Find a male voice
-      const maleVoice = availableVoices.find(isMaleVoice);
-      
-      // Only proceed with speech if a male voice is found
-      if (maleVoice) {
-        utterance.voice = maleVoice;
-        utterance.rate = 0.9; // Slightly slower rate for better clarity
-        utterance.pitch = 0.9; // Slightly lower pitch for male voice
-        console.log('Selected voice:', maleVoice.name); // For debugging
-        window.speechSynthesis.speak(utterance);
-      } else {
-        console.log('No male voice found, skipping audio playback');
-      }
-    };
-
-    // Get available voices
-    const voices = window.speechSynthesis.getVoices();
-    
-    // If voices are available immediately
-    if (voices.length > 0) {
-      setupVoice(voices);
-    } else {
-      // Wait for voices to be loaded (especially important for mobile)
-      window.speechSynthesis.addEventListener('voiceschanged', () => {
-        const updatedVoices = window.speechSynthesis.getVoices();
-        setupVoice(updatedVoices);
-      }, { once: true }); // Ensure the event listener is called only once
-    }
+  const playGreeting = (visitorName?: string) => {
+    // Play the greeting audio
+    audio.currentTime = 0; // Reset audio to start
+    audio.play().catch(error => {
+      console.log('Audio playback failed:', error);
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    speakGreeting(name.trim());
+    playGreeting(name.trim());
     onClose(name.trim());
   };
 
   const handleSkip = () => {
-    speakGreeting();
+    playGreeting();
     onClose();
   };
 
