@@ -17,13 +17,23 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ onClose }) => {
     // Get all available voices
     const voices = window.speechSynthesis.getVoices();
     
-    // Find a male voice (preferably English)
-    const maleVoice = voices.find(
-      voice => voice.name.includes('Male') || 
-               voice.name.includes('David') || 
-               voice.name.includes('James') ||
-               voice.name.includes('John')
-    );
+    // Function to check if a voice is male (avoiding female voices)
+    const isMaleVoice = (voice: SpeechSynthesisVoice) => {
+      const name = voice.name.toLowerCase();
+      // Check for male indicators
+      const maleIndicators = ['male', 'man', 'guy', 'boy', 'david', 'james', 'john', 'paul', 'george'];
+      const hasMaleIndicator = maleIndicators.some(indicator => name.includes(indicator));
+      
+      // Check for female indicators to exclude
+      const femaleIndicators = ['female', 'woman', 'girl', 'zira', 'microsoft eva'];
+      const hasFemaleIndicator = femaleIndicators.some(indicator => name.includes(indicator));
+      
+      // Return true only if it has male indicators and no female indicators
+      return hasMaleIndicator && !hasFemaleIndicator;
+    };
+
+    // Find a male voice
+    const maleVoice = voices.find(isMaleVoice);
 
     const utterance = new SpeechSynthesisUtterance(message);
     utterance.rate = 0.9; // Slightly slower rate for better clarity
@@ -36,12 +46,7 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ onClose }) => {
     if (voices.length === 0) {
       window.speechSynthesis.addEventListener('voiceschanged', () => {
         const updatedVoices = window.speechSynthesis.getVoices();
-        const updatedMaleVoice = updatedVoices.find(
-          voice => voice.name.includes('Male') || 
-                   voice.name.includes('David') || 
-                   voice.name.includes('James') ||
-                   voice.name.includes('John')
-        );
+        const updatedMaleVoice = updatedVoices.find(isMaleVoice);
         if (updatedMaleVoice) {
           utterance.voice = updatedMaleVoice;
         }
