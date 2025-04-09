@@ -17,7 +17,6 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ onClose }) => {
     // Function to check if a voice is male (avoiding female voices)
     const isMaleVoice = (voice: SpeechSynthesisVoice) => {
       const name = voice.name.toLowerCase();
-      const lang = voice.lang.toLowerCase();
       
       // Comprehensive list of male voice indicators
       const maleIndicators = [
