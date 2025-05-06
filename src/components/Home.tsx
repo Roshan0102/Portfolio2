@@ -37,12 +37,13 @@ const Home: React.FC = () => {
               </span>
             </h1>
             <h2 className="text-2xl md:text-3xl mb-6 text-gray-800 font-semibold">
-              AI & Full Stack Developer
+              Cloud Engineer @Axcess.io
             </h2>
             <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-              B.Tech graduate in Artificial Intelligence and Data Science with expertise in full-stack development and AI. 
-              Proficient in Python, SQL, and AWS cloud computing. Experienced in building dynamic web applications 
-              using React.JS, Node.js, and MongoDB.
+              AI & Cloud Computing Professional with a B.Tech in Artificial Intelligence and Data Science.
+Skilled in designing and deploying intelligent systems with hands-on expertise in Python, SQL, Machine Learning, Deep Learning, and Data Analytics. 
+              Proficient in leveraging AWS Cloud services to build, deploy, and manage cloud-native solutions. 
+              Passionate about solving real-world problems through data-driven insights and innovative technology.
             </p>
             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
               <a 
