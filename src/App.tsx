@@ -8,7 +8,6 @@ import Internships from './components/Internships';
 import Education from './components/Education';
 import Footer from './components/Footer';
 import WelcomeModal from './components/WelcomeModal';
-import WhatsAppChat from './components/WhatsAppChat';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const App: React.FC = () => {
@@ -53,7 +52,6 @@ const App: React.FC = () => {
       <Certifications />
       <Internships />
       <Footer />
-      <WhatsAppChat />
     </div>
   );
 };

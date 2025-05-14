@@ -5,6 +5,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import PhoneIcon from '@mui/icons-material/Phone';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
 const Footer: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -161,10 +162,19 @@ const Footer: React.FC = () => {
                     href="https://www.instagram.com/roshan__xavier__/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-blue-400 transition-colors"
+                    className="text-gray-400 hover:text-pink-400 transition-colors"
                     aria-label="Instagram Profile"
                   >
                     <InstagramIcon fontSize="large" />
+                  </a>
+                  <a
+                    href="https://wa.me/918754210276?text=Hi%20Roshan,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect!"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-green-400 transition-colors"
+                    aria-label="WhatsApp Chat"
+                  >
+                    <WhatsAppIcon fontSize="large" />
                   </a>
                 </div>
               </div>

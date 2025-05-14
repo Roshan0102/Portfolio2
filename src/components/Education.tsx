@@ -77,10 +77,26 @@ const Education: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Education Journey
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="relative inline-block"
+          >
+            <span className="absolute -top-10 left-1/2 transform -translate-x-1/2 text-6xl opacity-10">🎓</span>
+            <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent inline-block">
+              Education Journey
+            </h2>
+            <motion.div
+              initial={{ height: 0 }}
+              whileInView={{ height: '10px' }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="w-20 mx-auto mt-2 rounded-full bg-gradient-to-r from-blue-400 to-purple-500"
+            />
+          </motion.div>
+          <p className="text-gray-600 max-w-2xl mx-auto text-lg mt-5">
             My academic path in technology and innovation
           </p>
         </motion.div>

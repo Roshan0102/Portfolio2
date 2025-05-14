@@ -64,9 +64,22 @@ const Projects: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <motion.h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Projects</motion.h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Showcasing my expertise in full-stack development, machine learning, and data science
+          <div className="relative inline-block">
+            <div className="absolute -left-8 -right-8 top-1/2 transform -translate-y-1/2 h-0.5 bg-gray-200"></div>
+            <motion.div
+              initial={{ scale: 0, rotate: -5 }}
+              whileInView={{ scale: 1, rotate: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
+              className="relative z-10 px-4 bg-gray-50"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent inline-block">
+                Featured Projects
+              </h2>
+            </motion.div>
+          </div>
+          <p className="text-gray-600 max-w-2xl mx-auto mt-5">
+            Discover my latest software development projects and contributions
           </p>
         </motion.div>
 

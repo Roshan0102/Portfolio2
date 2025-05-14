@@ -48,8 +48,45 @@ const Certifications: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Certifications</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <div className="relative inline-block pb-3">
+            <motion.span 
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ 
+                duration: 0.6, 
+                delay: 0.2,
+                type: "spring",
+                stiffness: 200
+              }}
+              className="absolute w-8 h-8 -left-6 -top-2 rounded-full border-4 border-blue-500"
+            />
+            <motion.span 
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ 
+                duration: 0.6, 
+                delay: 0.4,
+                type: "spring",
+                stiffness: 200
+              }}
+              className="absolute w-6 h-6 -right-4 -bottom-1 rounded-full border-4 border-purple-500"
+            />
+            <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent inline-block">
+              Certifications
+            </h2>
+            <div className="absolute w-full h-0.5 bg-gray-200 bottom-0 left-0">
+              <motion.div 
+                initial={{ width: 0 }}
+                whileInView={{ width: '100%' }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.5 }}
+                className="h-full bg-gradient-to-r from-blue-600 to-purple-600"
+              />
+            </div>
+          </div>
+          <p className="text-gray-600 max-w-2xl mx-auto mt-5">
             Professional certifications that validate my expertise and commitment to continuous learning
           </p>
         </motion.div>

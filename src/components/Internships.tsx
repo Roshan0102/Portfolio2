@@ -61,8 +61,46 @@ const Internships: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Internship Experience</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <div className="relative inline-flex flex-col items-center">
+            <motion.div
+              initial={{ 
+                y: -20,
+                opacity: 0
+              }}
+              whileInView={{ 
+                y: 0,
+                opacity: 1
+              }}
+              viewport={{ once: true }}
+              transition={{ 
+                duration: 0.5,
+                delay: 0.2
+              }}
+              className="absolute -top-12 text-5xl"
+            >
+              💼
+            </motion.div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent inline-block">
+              Internship Experience
+            </h2>
+            <motion.div
+              initial={{ 
+                width: '0%',
+                x: '-50%'
+              }}
+              whileInView={{ 
+                width: '120%',
+                x: '-10%'
+              }}
+              viewport={{ once: true }}
+              transition={{ 
+                duration: 0.8,
+                delay: 0.3
+              }}
+              className="h-1 bg-gradient-to-r from-transparent via-purple-500 to-transparent absolute -bottom-2"
+            />
+          </div>
+          <p className="text-gray-600 max-w-2xl mx-auto mt-5">
             Professional experience gained through internships at leading technology companies
           </p>
         </motion.div>
