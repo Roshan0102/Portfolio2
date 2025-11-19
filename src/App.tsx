@@ -6,6 +6,7 @@ import Projects from './components/Projects';
 import Certifications from './components/Certifications';
 import Internships from './components/Internships';
 import Education from './components/Education';
+import LinkedInPosts from './components/LinkedInPosts';
 import Footer from './components/Footer';
 import WelcomeModal from './components/WelcomeModal';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -26,7 +27,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-primary">
       {showModal && <WelcomeModal onClose={handleModalClose} />}
-      
+
       <AnimatePresence>
         {showGreeting && (
           <motion.div
@@ -51,6 +52,7 @@ const App: React.FC = () => {
       <Education />
       <Certifications />
       <Internships />
+      <LinkedInPosts />
       <Footer />
     </div>
   );
