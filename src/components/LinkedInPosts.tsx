@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { fetchLinkedInPosts, LinkedInPost } from '../services/linkedinService';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import CommentIcon from '@mui/icons-material/Comment';
-import ShareIcon from '@mui/icons-material/Share';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import ArticleIcon from '@mui/icons-material/Article';
 
 const LinkedInPosts: React.FC = () => {
     const [posts, setPosts] = useState<LinkedInPost[]>([]);
@@ -32,15 +28,6 @@ const LinkedInPosts: React.FC = () => {
                 newSet.add(postId);
             }
             return newSet;
-        });
-    };
-
-    const formatDate = (dateString: string) => {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('en-US', {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric'
         });
     };
 
