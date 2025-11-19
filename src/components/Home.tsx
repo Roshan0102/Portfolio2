@@ -190,11 +190,11 @@ const Home: React.FC = () => {
             <h2 className="text-2xl md:text-3xl mb-6 text-gray-800 font-semibold">
               Cloud Engineer @Axcess.io
             </h2>
-            <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-              AI & Cloud Computing Professional with a B.Tech in Artificial Intelligence and Data Science.
-              Skilled in designing and deploying intelligent systems with hands-on expertise in Python, SQL, Machine Learning, Deep Learning, and Data Analytics.
-              Proficient in leveraging AWS Cloud services to build, deploy, and manage cloud-native solutions.
-              Passionate about solving real-world problems through data-driven insights and innovative technology.
+            <p className="text-lg text-gray-700 mb-8 leading-relaxed text-justify">
+              Cloud Computing Professional specializing in designing and deploying scalable AWS infrastructure.
+              Expert in Infrastructure as Code (IaC) using Terraform and CloudFormation, with deep proficiency in building cloud-native solutions.
+              Leveraging a strong academic background in Artificial Intelligence and Data Science, I integrate intelligent insights into cloud architecture.
+              Skilled in Python, SQL, and Machine Learning, I am passionate about solving real-world challenges through robust cloud systems and innovative technology.
             </p>
             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
               <a

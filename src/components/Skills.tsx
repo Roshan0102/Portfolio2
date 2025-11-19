@@ -9,6 +9,10 @@ interface Skill {
 const Skills: React.FC = () => {
   const skills: Skill[] = [
     {
+      category: "DevOps",
+      items: ["AWS Cloud", "CloudFormation", "Terraform"]
+    },
+    {
       category: "Programming Languages",
       items: ["Python", "JavaScript", "TypeScript"]
     },
@@ -22,7 +26,7 @@ const Skills: React.FC = () => {
     },
     {
       category: "Web Development",
-      items: ["HTML", "CSS", "ReactJS", "NodeJS", "AWS Cloud"]
+      items: ["HTML", "CSS", "ReactJS", "NodeJS"]
     },
     {
       category: "Soft Skills",
@@ -76,6 +80,7 @@ const Skills: React.FC = () => {
         </motion.div>
 
         <motion.div
+          key={skills.length}
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -90,7 +95,7 @@ const Skills: React.FC = () => {
             >
               <h3 className="text-xl font-semibold mb-4 text-gray-800 relative inline-block">
                 {skillGroup.category}
-                <motion.div 
+                <motion.div
                   initial={{ width: 0 }}
                   whileInView={{ width: '100%' }}
                   viewport={{ once: true }}
@@ -103,33 +108,33 @@ const Skills: React.FC = () => {
                   // Different animation variants based on skill index
                   const pulseVariants = {
                     hidden: { scale: 0.8, opacity: 0 },
-                    visible: { 
-                      scale: 1, 
+                    visible: {
+                      scale: 1,
                       opacity: 1,
-                      transition: { 
+                      transition: {
                         type: "spring",
                         stiffness: 300,
                         damping: 10,
                         delay: 0.3 + skillIndex * 0.05
-                      } 
+                      }
                     },
-                    hover: { 
+                    hover: {
                       scale: 1.07,
                       boxShadow: "0px 5px 15px rgba(0,0,0,0.1)",
-                      transition: { 
+                      transition: {
                         type: "spring",
                         stiffness: 400,
                         damping: 10
                       }
                     }
                   };
-                  
+
                   // Generate unique gradient for each skill
                   const gradientStyle = {
                     background: `linear-gradient(135deg, rgba(${130 + skillIndex * 5}, ${159 + skillIndex * 3}, 255, 0.7), rgba(${180 + skillIndex * 2}, ${100 + skillIndex * 5}, 255, 0.8))`,
                     boxShadow: '0px 2px 8px rgba(0,0,0,0.1)'
                   };
-                  
+
                   return (
                     <motion.span
                       key={skill}
@@ -139,14 +144,14 @@ const Skills: React.FC = () => {
                       style={gradientStyle}
                     >
                       <motion.span
-                        animate={{ 
+                        animate={{
                           rotate: [0, 5, 0, -5, 0],
                           opacity: [0.8, 1, 0.8]
                         }}
-                        transition={{ 
+                        transition={{
                           duration: 2,
                           repeat: Infinity,
-                          repeatDelay: 1 + skillIndex 
+                          repeatDelay: 1 + skillIndex
                         }}
                         className="text-xs">✦</motion.span>
                       {skill}
