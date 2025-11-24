@@ -148,16 +148,6 @@ const Home: React.FC = () => {
               onMouseMove={handleMouseMove}
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={handleMouseLeave}
-              animate={{
-                y: [0, -10, 0],
-              }}
-              transition={{
-                y: {
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }
-              }}
               style={{
                 rotateX,
                 rotateY,

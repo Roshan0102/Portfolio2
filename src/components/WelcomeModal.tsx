@@ -30,7 +30,7 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ onClose }) => {
         body: JSON.stringify({
           access_key: '196d8c62-340f-4232-8bdf-e45c96448232', // Replace with your Web3Forms access key
           subject: 'New Portfolio Visitor',
-          message: visitorName 
+          message: visitorName
             ? `${visitorName} is viewing your portfolio website`
             : 'An unknown person is viewing your portfolio website',
           from_name: visitorName || 'Unknown Visitor'
@@ -45,26 +45,26 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ onClose }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Play greeting audio
     playGreeting(name.trim());
-    
+
     // Send email notification
     await sendNotification(name.trim());
-    
+
     setIsSubmitting(false);
     onClose(name.trim());
   };
 
   const handleSkip = async () => {
     setIsSubmitting(true);
-    
+
     // Play greeting audio
     playGreeting();
-    
+
     // Send email notification
     await sendNotification();
-    
+
     setIsSubmitting(false);
     onClose();
   };
@@ -86,7 +86,7 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ onClose }) => {
             <CloseIcon />
           </button>
 
-          <h2 className="text-3xl font-bold mb-6 text-gray-800">Welcome!</h2>
+          <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center">Welcome!</h2>
           <p className="text-gray-600 mb-8">
             I'm excited to show you my portfolio. Would you like to introduce yourself?
           </p>
