@@ -332,8 +332,10 @@ const ParticleIntro: React.FC<ParticleIntroProps> = ({ onComplete }) => {
             if (animationFrameRef.current) {
                 cancelAnimationFrame(animationFrameRef.current);
             }
-            if (rendererRef.current && containerRef.current) {
-                containerRef.current.removeChild(rendererRef.current.domElement);
+            // Capture ref value to avoid React hooks warning
+            const container = containerRef.current;
+            if (rendererRef.current && container) {
+                container.removeChild(rendererRef.current.domElement);
                 rendererRef.current.dispose();
             }
         };
