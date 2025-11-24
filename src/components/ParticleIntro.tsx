@@ -333,6 +333,7 @@ const ParticleIntro: React.FC<ParticleIntroProps> = ({ onComplete }) => {
                 cancelAnimationFrame(animationFrameRef.current);
             }
             // Capture ref value to avoid React hooks warning
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             const container = containerRef.current;
             if (rendererRef.current && container) {
                 container.removeChild(rendererRef.current.domElement);
