@@ -35,7 +35,20 @@ const ParticleIntro: React.FC<ParticleIntroProps> = ({ onComplete }) => {
             renderer.setClearColor(0x000000);
             containerRef.current.appendChild(renderer.domElement);
 
-            camera.position.z = 25;
+
+            // Responsive camera position based on viewport
+            const viewportWidth = window.innerWidth;
+            if (viewportWidth < 768) {
+                // Mobile - move camera much further back to see all text
+                camera.position.z = 50;
+            } else if (viewportWidth < 1024) {
+                // Tablet
+                camera.position.z = 35;
+            } else {
+                // Desktop
+                camera.position.z = 25;
+            }
+
 
             sceneRef.current = scene;
             cameraRef.current = camera;
@@ -121,8 +134,19 @@ const ParticleIntro: React.FC<ParticleIntroProps> = ({ onComplete }) => {
             // Store target positions as user data for later animation
             geometry.userData.targetPositions = targetPositions;
 
+            // Responsive particle size
+            const viewportWidth = window.innerWidth;
+            let particleSize: number;
+            if (viewportWidth < 768) {
+                particleSize = 0.15; // Much larger particles for mobile visibility
+            } else if (viewportWidth < 1024) {
+                particleSize = 0.10; // Medium for tablets
+            } else {
+                particleSize = 0.08; // Original size for desktop
+            }
+
             const material = new THREE.PointsMaterial({
-                size: 0.08,
+                size: particleSize,
                 vertexColors: true,
                 blending: THREE.AdditiveBlending,
                 transparent: true,
@@ -172,9 +196,27 @@ const ParticleIntro: React.FC<ParticleIntroProps> = ({ onComplete }) => {
             const ctx = canvas.getContext('2d');
             if (!ctx) return [];
 
-            const fontSize = 60;
-            const padding = 20;
-            const lineHeight = fontSize * 1.3;
+            // Responsive font size based on viewport width
+            const viewportWidth = window.innerWidth;
+            let fontSize: number;
+            let scaleFactor: number;
+
+            if (viewportWidth < 768) {
+                // Mobile devices - much smaller text to fit screen
+                fontSize = Math.min(25, viewportWidth * 0.05); // Reduced from 0.08
+                scaleFactor = fontSize / 4; // Increased divisor for tighter spacing
+            } else if (viewportWidth < 1024) {
+                // Tablets
+                fontSize = 35; // Reduced from 45
+                scaleFactor = fontSize / 7; // Adjusted
+            } else {
+                // Desktop
+                fontSize = 60;
+                scaleFactor = fontSize / 10;
+            }
+
+            const padding = 10; // Reduced padding for mobile
+            const lineHeight = fontSize * 1.2; // Reduced line height for tighter spacing
 
             // Split text by newline for multi-line support
             const lines = text.split('\n');
@@ -212,10 +254,13 @@ const ParticleIntro: React.FC<ParticleIntroProps> = ({ onComplete }) => {
                     const x = (i / 4) % canvas.width;
                     const y = Math.floor(i / 4 / canvas.width);
 
-                    if (Math.random() < 0.5) { // Increased from 0.3 for denser text
+
+                    // Responsive particle density for better text clarity
+                    const density = viewportWidth < 768 ? 0.7 : 0.5;
+                    if (Math.random() < density) {
                         points.push({
-                            x: (x - canvas.width / 2) / (fontSize / 10),
-                            y: -(y - canvas.height / 2) / (fontSize / 10),
+                            x: (x - canvas.width / 2) / scaleFactor,
+                            y: -(y - canvas.height / 2) / scaleFactor,
                         });
                     }
                 }

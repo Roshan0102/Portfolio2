@@ -1,80 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Roshan J - Portfolio | AI & Full Stack Developer"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>Roshan J - Portfolio</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--Start of Tawk.to Script-->
-    <script type="text/javascript">
-      var Tawk_API=Tawk_API||{};
-      
-      // Configure widget before loading
-      Tawk_API.customStyle = {
-        visibility: {
-          desktop: {
-            position: 'br',
-            xOffset: '20px',
-            yOffset: '20px'
-          },
-          mobile: {
-            position: 'br',
-            xOffset: '10px',
-            yOffset: '10px'
-          }
-        }
-      };
 
-      // Callback when widget is ready
-      Tawk_API.onLoad = function(){
-        console.log('Tawk.to loaded successfully');
-        // Force widget to show on mobile
-        if(window.innerWidth <= 768) {
-          Tawk_API.showWidget();
-        }
-      };
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Roshan J - Portfolio | AI & Full Stack Developer" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <title>Roshan J - Portfolio</title>
+</head>
 
-      // Monitor status changes
-      Tawk_API.onStatusChange = function(status){
-        console.log('Tawk.to status:', status);
-        if(status === 'online') {
-          // Ensure widget is visible when agent is online
-          Tawk_API.showWidget();
-        }
-      };
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {};
 
-      // Load widget with high priority
-      Tawk_LoadStart=new Date();
-      (function(){
-        try {
-          var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-          s1.async=true;
-          s1.defer=false; // Remove defer to load with higher priority
-          s1.src='https://embed.tawk.to/6824dce7fc60c1190f0dbf62/1ir7vtr1d';
-          s1.charset='UTF-8';
-          s1.setAttribute('crossorigin','*');
-          s1.setAttribute('importance', 'high'); // Add importance attribute
-          s0.parentNode.insertBefore(s1,s0);
-        } catch (e) {
-          console.error('Error loading Tawk.to:', e);
-          // Retry loading after 2 seconds if failed
-          setTimeout(function() {
-            window.location.reload();
-          }, 2000);
+    // Configure widget before loading
+    Tawk_API.customStyle = {
+      visibility: {
+        desktop: {
+          position: 'br',
+          xOffset: '20px',
+          yOffset: '20px'
+        },
+        mobile: {
+          position: 'br',
+          xOffset: '10px',
+          yOffset: '10px'
         }
-      })();
-    </script>
-    <!--End of Tawk.to Script-->
-  </body>
-</html> 
+      }
+    };
+
+    // Callback when widget is ready
+    Tawk_API.onLoad = function () {
+      console.log('Tawk.to loaded successfully');
+      // Force widget to show on mobile
+      if (window.innerWidth <= 768) {
+        Tawk_API.showWidget();
+      }
+    };
+
+    // Monitor status changes
+    Tawk_API.onStatusChange = function (status) {
+      console.log('Tawk.to status:', status);
+      if (status === 'online') {
+        // Ensure widget is visible when agent is online
+        Tawk_API.showWidget();
+      }
+    };
+
+    // Load widget with high priority
+    Tawk_LoadStart = new Date();
+    (function () {
+      try {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.defer = false; // Remove defer to load with higher priority
+        s1.src = 'https://embed.tawk.to/6824dce7fc60c1190f0dbf62/1ir7vtr1d';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s1.setAttribute('importance', 'high'); // Add importance attribute
+        s0.parentNode.insertBefore(s1, s0);
+      } catch (e) {
+        console.error('Error loading Tawk.to:', e);
+        // Retry loading after 2 seconds if failed
+        setTimeout(function () {
+          window.location.reload();
+        }, 2000);
+      }
+    })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+
+</html>
