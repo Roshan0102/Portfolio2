@@ -291,10 +291,14 @@ const ParticleIntro: React.FC<ParticleIntroProps> = ({ onComplete }) => {
                     targetPositions[i * 3 + 1] = textPoints[i].y;
                     targetPositions[i * 3 + 2] = 0;
                 } else {
-                    // Move unused particles far away from camera
-                    targetPositions[i * 3] = (Math.random() - 0.5) * 100;
-                    targetPositions[i * 3 + 1] = (Math.random() - 0.5) * 100;
-                    targetPositions[i * 3 + 2] = -100; // Far behind
+                    // Move unused particles far away and scatter them spherically to avoid "box" look
+                    const theta = Math.random() * Math.PI * 2;
+                    const phi = Math.acos((Math.random() * 2) - 1);
+                    const radius = 100 + Math.random() * 100; // Far away radius
+
+                    targetPositions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+                    targetPositions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+                    targetPositions[i * 3 + 2] = radius * Math.cos(phi); // Scatter in all directions
                 }
             }
 
@@ -314,7 +318,7 @@ const ParticleIntro: React.FC<ParticleIntroProps> = ({ onComplete }) => {
                 });
             }
 
-            // Animate colors - make text particles vibrant purple-cyan gradient, others dim
+            // Animate colors - make text particles vibrant purple-cyan gradient, others invisible
             for (let i = 0; i < count; i++) {
                 let targetColor;
                 if (i < textPoints.length) {
@@ -330,7 +334,7 @@ const ParticleIntro: React.FC<ParticleIntroProps> = ({ onComplete }) => {
                         b: purple.b + (cyan.b - purple.b) * gradientPosition
                     };
                 } else {
-                    targetColor = { r: 0.1, g: 0.1, b: 0.15 }; // Very dim for background
+                    targetColor = { r: 0, g: 0, b: 0 }; // Completely black/invisible
                 }
 
                 gsap.to(particlesRef.current.geometry.attributes.color.array, {
