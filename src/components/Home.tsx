@@ -157,9 +157,10 @@ const Home: React.FC = () => {
               className="cursor-pointer"
             >
               <img
-                src="https://i.postimg.cc/T2J0WJ00/URK20-AI1036-removebg.png"
+                src="/assets/profile.png"
                 alt="Roshan J"
                 className="w-full h-auto"
+                fetchPriority="high"
               />
             </motion.div>
           </motion.div>
@@ -204,7 +205,7 @@ const Home: React.FC = () => {
                 <GitHubIcon /> View GitHub
               </a>
               <a
-                href="https://drive.google.com/file/d/1r3PFmdfxyOaMb-n2iKzK1qJtRaa9oHgi/view?usp=sharing"
+                href="/assets/Roshan_Cloud_Engineer.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 inline-flex items-center gap-2"

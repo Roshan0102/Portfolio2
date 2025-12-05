@@ -117,7 +117,7 @@ const Education: React.FC = () => {
               {index !== education.length - 1 && (
                 <div className="absolute left-8 top-20 w-1 h-24 bg-gradient-to-b from-blue-400 to-purple-400" />
               )}
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 hover:border-purple-300">
                 <div className="flex flex-col md:flex-row gap-6">
                   <motion.div
                     variants={iconVariants}

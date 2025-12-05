@@ -13,6 +13,12 @@ interface Certification {
 const Certifications: React.FC = () => {
   const certifications: Certification[] = [
     {
+      title: "AWS Certified Cloud Practitioner",
+      issuer: "Amazon Web Services",
+      image: "https://images.ctfassets.net/xz1dnu24egyd/72URY4Vg59wKsYMpTqrMel/194347274767abce3c04be7be72a75a3/AWS-Logo__1_.png",
+      url: "https://drive.google.com/file/d/1nVkYh26b5gI3FWBlobwYj7YkcJYyibtg/view?usp=sharing"
+    },
+    {
       title: "Python for Data Science",
       issuer: "NPTEL",
       image: "https://img.freepik.com/free-vector/programming-concept-illustration_114360-1351.jpg",
@@ -29,12 +35,6 @@ const Certifications: React.FC = () => {
       issuer: "NPTEL",
       image: "https://img.freepik.com/free-vector/data-extraction-concept-illustration_114360-4766.jpg",
       url: "https://drive.google.com/file/d/1erd1dJ_lxk_pHvdIxfok_cc6C6iMAcxm/view?usp=sharing"
-    },
-    {
-      title: "AWS Certified Cloud Practitioner",
-      issuer: "Amazon Web Services",
-      image: "https://images.ctfassets.net/xz1dnu24egyd/72URY4Vg59wKsYMpTqrMel/194347274767abce3c04be7be72a75a3/AWS-Logo__1_.png",
-      url: "https://drive.google.com/file/d/1nVkYh26b5gI3FWBlobwYj7YkcJYyibtg/view?usp=sharing"
     }
   ];
 
@@ -49,24 +49,24 @@ const Certifications: React.FC = () => {
           className="text-center mb-12"
         >
           <div className="relative inline-block pb-3">
-            <motion.span 
+            <motion.span
               initial={{ opacity: 0, scale: 0 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ 
-                duration: 0.6, 
+              transition={{
+                duration: 0.6,
                 delay: 0.2,
                 type: "spring",
                 stiffness: 200
               }}
               className="absolute w-8 h-8 -left-6 -top-2 rounded-full border-4 border-blue-500"
             />
-            <motion.span 
+            <motion.span
               initial={{ opacity: 0, scale: 0 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ 
-                duration: 0.6, 
+              transition={{
+                duration: 0.6,
                 delay: 0.4,
                 type: "spring",
                 stiffness: 200
@@ -77,7 +77,7 @@ const Certifications: React.FC = () => {
               Certifications
             </h2>
             <div className="absolute w-full h-0.5 bg-gray-200 bottom-0 left-0">
-              <motion.div 
+              <motion.div
                 initial={{ width: 0 }}
                 whileInView={{ width: '100%' }}
                 viewport={{ once: true }}
@@ -99,7 +99,7 @@ const Certifications: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+              className="bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 hover:border-purple-300"
             >
               <div className="relative h-48">
                 <img
@@ -139,4 +139,4 @@ const Certifications: React.FC = () => {
   );
 };
 
-export default Certifications; 
+export default Certifications;

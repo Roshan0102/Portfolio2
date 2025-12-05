@@ -55,24 +55,26 @@
 
     // Load widget with high priority
     Tawk_LoadStart = new Date();
-    (function () {
-      try {
-        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-        s1.async = true;
-        s1.defer = false; // Remove defer to load with higher priority
-        s1.src = 'https://embed.tawk.to/6824dce7fc60c1190f0dbf62/1ir7vtr1d';
-        s1.charset = 'UTF-8';
-        s1.setAttribute('crossorigin', '*');
-        s1.setAttribute('importance', 'high'); // Add importance attribute
-        s0.parentNode.insertBefore(s1, s0);
-      } catch (e) {
-        console.error('Error loading Tawk.to:', e);
-        // Retry loading after 2 seconds if failed
-        setTimeout(function () {
-          window.location.reload();
-        }, 2000);
-      }
-    })();
+    setTimeout(function () {
+      (function () {
+        try {
+          var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+          s1.async = true;
+          s1.defer = false; // Remove defer to load with higher priority
+          s1.src = 'https://embed.tawk.to/6824dce7fc60c1190f0dbf62/1ir7vtr1d';
+          s1.charset = 'UTF-8';
+          s1.setAttribute('crossorigin', '*');
+          s1.setAttribute('importance', 'high'); // Add importance attribute
+          s0.parentNode.insertBefore(s1, s0);
+        } catch (e) {
+          console.error('Error loading Tawk.to:', e);
+          // Retry loading after 2 seconds if failed
+          setTimeout(function () {
+            window.location.reload();
+          }, 2000);
+        }
+      })();
+    }, 10000);
   </script>
   <!--End of Tawk.to Script-->
 </body>

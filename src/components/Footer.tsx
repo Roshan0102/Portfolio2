@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-gray-900 text-white py-20">
+    <footer id="contact" className="bg-gray-900 text-white pt-20 pb-40">
       <div className="section-container">
         <div className="grid md:grid-cols-2 gap-12">
           {/* Contact Form Section */}
@@ -179,7 +179,7 @@ const Footer: React.FC = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="mt-12 text-center md:text-left">
               <p className="text-gray-500">
                 © {new Date().getFullYear()} Roshan J. All rights reserved.

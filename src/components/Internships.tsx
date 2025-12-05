@@ -63,16 +63,16 @@ const Internships: React.FC = () => {
         >
           <div className="relative inline-flex flex-col items-center">
             <motion.div
-              initial={{ 
+              initial={{
                 y: -20,
                 opacity: 0
               }}
-              whileInView={{ 
+              whileInView={{
                 y: 0,
                 opacity: 1
               }}
               viewport={{ once: true }}
-              transition={{ 
+              transition={{
                 duration: 0.5,
                 delay: 0.2
               }}
@@ -84,16 +84,16 @@ const Internships: React.FC = () => {
               Internship Experience
             </h2>
             <motion.div
-              initial={{ 
+              initial={{
                 width: '0%',
                 x: '-50%'
               }}
-              whileInView={{ 
+              whileInView={{
                 width: '120%',
                 x: '-10%'
               }}
               viewport={{ once: true }}
-              transition={{ 
+              transition={{
                 duration: 0.8,
                 delay: 0.3
               }}
@@ -113,7 +113,7 @@ const Internships: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-purple-300"
             >
               <div className="md:grid md:grid-cols-3 gap-6">
                 <div className="relative h-64 md:h-full">

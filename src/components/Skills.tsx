@@ -91,7 +91,7 @@ const Skills: React.FC = () => {
             <motion.div
               key={skillGroup.category}
               variants={itemVariants}
-              className="bg-gray-50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="bg-gray-50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-purple-300"
             >
               <h3 className="text-xl font-semibold mb-4 text-gray-800 relative inline-block">
                 {skillGroup.category}

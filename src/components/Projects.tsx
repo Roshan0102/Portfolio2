@@ -1,7 +1,9 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import ArticleIcon from '@mui/icons-material/Article';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 interface Project {
   title: string;
@@ -13,7 +15,35 @@ interface Project {
 }
 
 const Projects: React.FC = () => {
+  const [showAll, setShowAll] = useState(false);
+
   const projects: Project[] = [
+    {
+      title: "Scalable 3-Tier Web Infrastructure on AWS",
+      description: [
+        "Designed and deployed a highly available 3-tier architecture on AWS using Terraform.",
+        "Implemented VPC with public/private subnets, NAT Gateways, and Application Load Balancer.",
+        "Configured Auto Scaling Groups for web and application tiers to ensure high availability.",
+        "Set up RDS Multi-AZ deployment for database redundancy and disaster recovery."
+      ],
+      technologies: ["AWS", "Terraform", "VPC", "EC2", "RDS", "ALB", "Auto Scaling"],
+      image: "/assets/AWS_Three_Tier_Architecture_Project_GIF.gif",
+      url: "https://github.com/Roshan0102", // Placeholder URL
+      type: "github"
+    },
+    {
+      title: "Multi-Layer AWS Load Balancer Architecture",
+      description: [
+        "Architected a multi-layer load balancing solution to distribute traffic efficiently.",
+        "Utilized Network Load Balancer (NLB) for high throughput and Application Load Balancer (ALB) for content-based routing.",
+        "Enhanced security with AWS WAF and Security Groups integration.",
+        "Optimized performance and reduced latency for global users."
+      ],
+      technologies: ["AWS", "NLB", "ALB", "WAF", "Route53"],
+      image: "/assets/AWS_Load_Balancer_Architecture_GIF.gif",
+      url: "https://github.com/Roshan0102", // Placeholder URL
+      type: "github"
+    },
     {
       title: "MERN Full-Stack Bikepooling Platform",
       description: [
@@ -54,6 +84,8 @@ const Projects: React.FC = () => {
     }
   ];
 
+  const displayedProjects = showAll ? projects : projects.slice(0, 3);
+
   return (
     <section id="projects" className="py-20 bg-gray-50">
       <div className="section-container">
@@ -84,64 +116,93 @@ const Projects: React.FC = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
-            >
-              <div className="md:grid md:grid-cols-2 gap-6">
-                <div className="relative h-64 md:h-full">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold mb-4 text-gray-800">{project.title}</h3>
-                  <ul className="list-disc list-inside mb-4 text-gray-600 space-y-2">
-                    {project.description.map((point, i) => (
-                      <li key={i}>{point}</li>
-                    ))}
-                  </ul>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 bg-primary rounded-full text-sm text-gray-800"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
-                  >
-                    {project.type === 'github' ? (
-                      <>
-                        <GitHubIcon /> View on GitHub
-                      </>
+          <AnimatePresence>
+            {displayedProjects.map((project, index) => (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-purple-300"
+              >
+                <div className="md:grid md:grid-cols-2 gap-6">
+                  <div className="relative h-64 md:h-full bg-gray-100 flex items-center justify-center">
+                    {project.image ? (
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                      />
                     ) : (
-                      <>
-                        <ArticleIcon /> Read Publication
-                      </>
+                      <div className="text-gray-400 text-center p-8">
+                        <GitHubIcon style={{ fontSize: 64, opacity: 0.2 }} />
+                        <p className="mt-2 text-sm">Preview coming soon</p>
+                      </div>
                     )}
-                  </a>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold mb-4 text-gray-800">{project.title}</h3>
+                    <ul className="list-disc list-inside mb-4 text-gray-600 space-y-2">
+                      {project.description.map((point, i) => (
+                        <li key={i}>{point}</li>
+                      ))}
+                    </ul>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-3 py-1 bg-primary rounded-full text-sm text-gray-800"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
+                    >
+                      {project.type === 'github' ? (
+                        <>
+                          <GitHubIcon /> View on GitHub
+                        </>
+                      ) : (
+                        <>
+                          <ArticleIcon /> Read Publication
+                        </>
+                      )}
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
+
+        {projects.length > 3 && (
+          <div className="text-center mt-12">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-white border border-gray-200 text-gray-800 font-semibold hover:bg-gray-50 hover:border-blue-300 transition-all duration-300 shadow-sm hover:shadow-md"
+            >
+              {showAll ? (
+                <>
+                  Show Less <KeyboardArrowUpIcon />
+                </>
+              ) : (
+                <>
+                  View More Projects <KeyboardArrowDownIcon />
+                </>
+              )}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
 };
 
-export default Projects; 
+export default Projects;

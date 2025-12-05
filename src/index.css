@@ -18,24 +18,15 @@
   }
 
   .nav-link {
-    @apply text-gray-900 font-semibold hover:text-blue-700 cursor-pointer transition-colors duration-300 relative;
-  }
-
-  .nav-link::after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300;
-  }
-
-  .nav-link:hover::after {
-    @apply w-full;
+    @apply text-gray-600 font-medium px-4 py-2 rounded-full transition-all duration-300 cursor-pointer relative hover:text-gray-900;
   }
 
   .nav-link.active {
-    @apply text-blue-700;
+    @apply text-white bg-gradient-to-r from-blue-600 to-purple-600 shadow-md;
   }
 
-  .nav-link.active::after {
-    @apply w-full;
+  .nav-link:not(.active):hover {
+    @apply bg-gray-100;
   }
 
   .btn-primary {

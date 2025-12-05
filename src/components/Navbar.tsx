@@ -17,30 +17,33 @@ const Navbar: React.FC = () => {
 
   const navItems = [
     { title: 'Home', to: 'home' },
+    { title: 'Ask AI', to: 'ask-ai' },
     { title: 'Skills', to: 'skills' },
+    { title: 'Experience', to: 'experience' },
     { title: 'Projects', to: 'projects' },
     { title: 'Education', to: 'education' },
     { title: 'Certifications', to: 'certifications' },
     { title: 'Internships', to: 'internships' },
+    { title: 'Contact', to: 'contact' },
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      scrolled ? 'bg-white/90 backdrop-blur-sm shadow-lg' : 'bg-transparent'
-    }`}>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-sm shadow-lg' : 'bg-transparent'
+      }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-center items-center h-16 relative">
           {/* Desktop Navigation */}
           <div className="hidden md:block">
-            <div className="flex space-x-12">
+            <div className="flex space-x-1">
               {navItems.map((item) => (
                 <Link
+                  activeClass="active"
                   key={item.title}
                   to={item.to}
                   spy={true}
                   smooth={true}
                   offset={-64}
-                  duration={500}
+                  duration={100}
                   className="nav-link"
                 >
                   {item.title}
@@ -73,7 +76,7 @@ const Navbar: React.FC = () => {
                 spy={true}
                 smooth={true}
                 offset={-64}
-                duration={500}
+                duration={100}
                 className="block px-3 py-2 rounded-md text-gray-900 font-semibold hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-700 transition-all text-center"
                 onClick={() => setIsOpen(false)}
               >

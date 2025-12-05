@@ -81,7 +81,7 @@ const LinkedInPosts: React.FC = () => {
                                 >
                                     {/* Front of Card */}
                                     <div
-                                        className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl shadow-lg p-6 flex flex-col"
+                                        className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl shadow-lg p-6 flex flex-col border border-gray-200 hover:border-purple-300 transition-all duration-300"
                                         style={{
                                             backfaceVisibility: 'hidden',
                                             WebkitBackfaceVisibility: 'hidden',
