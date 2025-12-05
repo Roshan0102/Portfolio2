@@ -105,7 +105,7 @@ const Projects: React.FC = () => {
               transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
               className="relative z-10 px-4 bg-gray-50"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent inline-block">
+              <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-600 via-purple-400 to-blue-600 bg-clip-text text-transparent inline-block animate-shine">
                 Featured Projects
               </h2>
             </motion.div>

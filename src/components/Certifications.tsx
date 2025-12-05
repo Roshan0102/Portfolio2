@@ -73,7 +73,7 @@ const Certifications: React.FC = () => {
               }}
               className="absolute w-6 h-6 -right-4 -bottom-1 rounded-full border-4 border-purple-500"
             />
-            <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent inline-block">
+            <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-600 via-purple-400 to-blue-600 bg-clip-text text-transparent inline-block animate-shine">
               Certifications
             </h2>
             <div className="absolute w-full h-0.5 bg-gray-200 bottom-0 left-0">

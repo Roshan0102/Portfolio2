@@ -8,16 +8,8 @@ interface WelcomeModalProps {
 
 const WelcomeModal: React.FC<WelcomeModalProps> = ({ onClose }) => {
   const [name, setName] = useState('');
-  const [audio] = useState(new Audio('/greeting.mp3'));
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const playGreeting = (visitorName?: string) => {
-    // Play the greeting audio
-    audio.currentTime = 0; // Reset audio to start
-    audio.play().catch(error => {
-      console.log('Audio playback failed:', error);
-    });
-  };
 
   const sendNotification = async (visitorName?: string) => {
     try {
@@ -42,28 +34,22 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ onClose }) => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Play greeting audio
-    playGreeting(name.trim());
-
-    // Send email notification
-    await sendNotification(name.trim());
+    // Send email notification (non-blocking)
+    sendNotification(name.trim());
 
     setIsSubmitting(false);
     onClose(name.trim());
   };
 
-  const handleSkip = async () => {
+  const handleSkip = () => {
     setIsSubmitting(true);
 
-    // Play greeting audio
-    playGreeting();
-
-    // Send email notification
-    await sendNotification();
+    // Send email notification (non-blocking)
+    sendNotification();
 
     setIsSubmitting(false);
     onClose();

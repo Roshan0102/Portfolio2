@@ -48,7 +48,7 @@ const LinkedInPosts: React.FC = () => {
                 >
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">
                         Latest{' '}
-                        <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-r from-blue-600 via-purple-400 to-blue-600 bg-clip-text text-transparent animate-shine">
                             LinkedIn Posts
                         </span>
                     </h2>

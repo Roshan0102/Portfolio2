@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+// Main App Component
 import Navbar from './components/Navbar';
 import Home from './components/Home';
-import Skills from './components/Skills';
+import Skills from './components/SkillsSection';
 import WorkExperience from './components/WorkExperience';
 import Projects from './components/Projects';
 import Certifications from './components/Certifications';
@@ -69,4 +70,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App; 
+export default App;

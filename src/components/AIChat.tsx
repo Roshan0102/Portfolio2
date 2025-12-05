@@ -24,9 +24,14 @@ const AIChat: React.FC = () => {
         messagesRef.current = messages;
     }, [messages]);
 
+    const lastSentLengthRef = useRef(0);
+
     useEffect(() => {
         const handleUnload = () => {
-            if (messagesRef.current.length === 0) return;
+            if (messagesRef.current.length === 0 || messagesRef.current.length === lastSentLengthRef.current) return;
+
+            // Update last sent length to prevent duplicate sends for the same content
+            lastSentLengthRef.current = messagesRef.current.length;
 
             const chatTranscript = messagesRef.current
                 .map(msg => `${msg.role.toUpperCase()}: ${msg.content}`)
@@ -51,10 +56,21 @@ const AIChat: React.FC = () => {
             }).catch(err => console.error('Failed to send chat transcript:', err));
         };
 
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === 'hidden') {
+                handleUnload();
+            }
+        };
+
+        // 'pagehide' is more reliable on mobile browsers than 'beforeunload'
+        window.addEventListener('pagehide', handleUnload);
         window.addEventListener('beforeunload', handleUnload);
+        document.addEventListener('visibilitychange', handleVisibilityChange);
 
         return () => {
+            window.removeEventListener('pagehide', handleUnload);
             window.removeEventListener('beforeunload', handleUnload);
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
         };
     }, []);
 
@@ -115,7 +131,7 @@ const AIChat: React.FC = () => {
                 <div className="text-center mb-8">
                     <div className="flex items-center justify-center gap-2 mb-2">
                         <AutoAwesomeIcon className="text-purple-600" fontSize="large" />
-                        <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-400 to-blue-600 bg-clip-text text-transparent animate-shine">
                             Ask AI
                         </span>
                     </div>
@@ -219,7 +235,7 @@ const AIChat: React.FC = () => {
                     >
                         {[
                             "Summarize your experience",
-                            "Do you know React & Node.js?",
+                            "Why should I hire you?",
                             "Analyze this job description..."
                         ].map((suggestion, i) => (
                             <button
