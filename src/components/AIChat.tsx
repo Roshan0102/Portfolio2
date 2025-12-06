@@ -44,16 +44,13 @@ const AIChat: React.FC = () => {
                 from_name: 'Portfolio AI Chat'
             };
 
-            // Use fetch with keepalive to ensure the request is sent even if the page is closing
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(data),
-                keepalive: true
-            }).catch(err => console.error('Failed to send chat transcript:', err));
+            // Use navigator.sendBeacon for better reliability on mobile/in-app browsers during unload
+            const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+            const success = navigator.sendBeacon('https://api.web3forms.com/submit', blob);
+
+            if (!success) {
+                console.error('Failed to queue chat transcript beacon');
+            }
         };
 
         const handleVisibilityChange = () => {
