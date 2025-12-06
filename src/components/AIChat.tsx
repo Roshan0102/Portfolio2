@@ -18,58 +18,7 @@ const AIChat: React.FC = () => {
     const [copied, setCopied] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
-    const messagesRef = useRef<Message[]>([]);
 
-    useEffect(() => {
-        messagesRef.current = messages;
-    }, [messages]);
-
-    const lastSentLengthRef = useRef(0);
-
-    useEffect(() => {
-        const handleUnload = () => {
-            if (messagesRef.current.length === 0 || messagesRef.current.length === lastSentLengthRef.current) return;
-
-            // Update last sent length to prevent duplicate sends for the same content
-            lastSentLengthRef.current = messagesRef.current.length;
-
-            const chatTranscript = messagesRef.current
-                .map(msg => `${msg.role.toUpperCase()}: ${msg.content}`)
-                .join('\n\n');
-
-            const data = {
-                access_key: '196d8c62-340f-4232-8bdf-e45c96448232',
-                subject: 'New AI Chat Session Transcript',
-                message: `Here is the chat transcript from a visitor session:\n\n${chatTranscript}`,
-                from_name: 'Portfolio AI Chat'
-            };
-
-            // Use navigator.sendBeacon for better reliability on mobile/in-app browsers during unload
-            const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
-            const success = navigator.sendBeacon('https://api.web3forms.com/submit', blob);
-
-            if (!success) {
-                console.error('Failed to queue chat transcript beacon');
-            }
-        };
-
-        const handleVisibilityChange = () => {
-            if (document.visibilityState === 'hidden') {
-                handleUnload();
-            }
-        };
-
-        // 'pagehide' is more reliable on mobile browsers than 'beforeunload'
-        window.addEventListener('pagehide', handleUnload);
-        window.addEventListener('beforeunload', handleUnload);
-        document.addEventListener('visibilitychange', handleVisibilityChange);
-
-        return () => {
-            window.removeEventListener('pagehide', handleUnload);
-            window.removeEventListener('beforeunload', handleUnload);
-            document.removeEventListener('visibilitychange', handleVisibilityChange);
-        };
-    }, []);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -103,6 +52,21 @@ const AIChat: React.FC = () => {
             if (data.error) throw new Error(data.error);
 
             setMessages(prev => [...prev, { role: 'assistant', content: data.reply }]);
+
+            // Send email for this specific interaction immediately
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    access_key: '196d8c62-340f-4232-8bdf-e45c96448232',
+                    subject: 'New Portfolio AI Chat Q&A',
+                    message: `User Question:\n${userMessage}\n\nAI Answer:\n${data.reply}`,
+                    from_name: 'Portfolio AI Chat'
+                })
+            }).catch(err => console.error('Failed to send chat email:', err));
         } catch (error) {
             console.error('Chat error:', error);
             setMessages(prev => [...prev, {
