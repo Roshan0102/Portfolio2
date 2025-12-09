@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import VerifiedIcon from '@mui/icons-material/Verified';
+import { useNavigate } from 'react-router-dom';
 import LaunchIcon from '@mui/icons-material/Launch';
+import VerifiedIcon from '@mui/icons-material/Verified';
 
 interface Certification {
   title: string;
@@ -11,6 +12,7 @@ interface Certification {
 }
 
 const Certifications: React.FC = () => {
+  const navigate = useNavigate();
   const certifications: Certification[] = [
     {
       title: "AWS Certified Cloud Practitioner",
@@ -130,6 +132,16 @@ const Certifications: React.FC = () => {
                     <VerifiedIcon fontSize="small" /> Verified
                   </span>
                 </div>
+                {cert.title === "AWS Certified Cloud Practitioner" && (
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => navigate('/mock-tests/aws-ccp')}
+                    className="mt-4 w-full py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all"
+                  >
+                    Take Mock Test
+                  </motion.button>
+                )}
               </div>
             </motion.div>
           ))}
