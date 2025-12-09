@@ -529,7 +529,7 @@ export const awsCCPQuestions: Question[] = [
     ],
         correctAnswer: 0,
         correctAnswers: [0],
-        explanation: "Amazon S3 (Simple Storage Service) provides highly durable object storage with 99.999999999% (11 9\'s) durability (p. 10)."
+        explanation: "Amazon S3 (Simple Storage Service) provides highly durable object storage with 99.999999999% (11 9's) durability (p. 10)."
     },
     {
         id: 41,
@@ -572,7 +572,7 @@ export const awsCCPQuestions: Question[] = [
     },
     {
         id: 44,
-        text: "A company wants to query its server logs to gain insights about its customers\' experiences. Which AWS service will store this data MOST cost-effectively?",
+        text: "A company wants to query its server logs to gain insights about its customers' experiences. Which AWS service will store this data MOST cost-effectively?",
         options: [
         "Amazon Aurora",
         "Amazon Elastic File System (Amazon EFS)",
@@ -738,7 +738,7 @@ export const awsCCPQuestions: Question[] = [
     ],
         correctAnswer: 1,
         correctAnswers: [1],
-        explanation: "S3 Transfer Acceleration is a feature of Amazon S3 that uses Amazon CloudFront\'s globally distributed edge locations to accelerate transfers of files to and from Amazon S3 buckets (p. 14)."
+        explanation: "S3 Transfer Acceleration is a feature of Amazon S3 that uses Amazon CloudFront's globally distributed edge locations to accelerate transfers of files to and from Amazon S3 buckets (p. 14)."
     },
     {
         id: 57,
@@ -928,7 +928,7 @@ export const awsCCPQuestions2: Question[] = [
     },
     {
         id: 4,
-        text: "A user needs a relational database but does not have the resources to manage the hardware, resiliency, and replication. Which AWS service option meets the user\'s requirements?",
+        text: "A user needs a relational database but does not have the resources to manage the hardware, resiliency, and replication. Which AWS service option meets the user's requirements?",
         options: [
         "Run MySQL on Amazon Elastic Container Service (Amazon ECS).",
         "Run MySQL on Amazon EC2.",
@@ -1046,7 +1046,7 @@ export const awsCCPQuestions2: Question[] = [
     },
     {
         id: 13,
-        text: "A company wants to migrate its on-premises SQL Server database to the AWS Cloud. The company wants AWS to handle the day-to-day administration of the database. Which AWS service will meet the company\'s requirements?",
+        text: "A company wants to migrate its on-premises SQL Server database to the AWS Cloud. The company wants AWS to handle the day-to-day administration of the database. Which AWS service will meet the company's requirements?",
         options: [
         "Amazon EC2 for Microsoft SQL Server",
         "Amazon DynamoDB",
@@ -1120,7 +1120,7 @@ export const awsCCPQuestions2: Question[] = [
     ],
         correctAnswer: 3,
         correctAnswers: [3],
-        explanation: "Amazon Aurora Serverless provides the highest level of automation and scalability as it is a serverless database solution. You don\'t have to worry about managing database instances, scaling, or maintenance. (p. 9)"
+        explanation: "Amazon Aurora Serverless provides the highest level of automation and scalability as it is a serverless database solution. You don't have to worry about managing database instances, scaling, or maintenance. (p. 9)"
     },
     {
         id: 19,
@@ -1186,11 +1186,11 @@ export const awsCCPQuestions2: Question[] = [
     ],
         correctAnswer: 2,
         correctAnswers: [2],
-        explanation: "Amazon DynamoDB can automatically scale throughput capacity based on the application\'s demand, making it a suitable choice for workloads with varying traffic patterns. (p. 11)"
+        explanation: "Amazon DynamoDB can automatically scale throughput capacity based on the application's demand, making it a suitable choice for workloads with varying traffic patterns. (p. 11)"
     },
     {
         id: 24,
-        text: "A company is using Amazon DynamoDB. Which task is the company\'s responsibility, according to the AWS shared responsibility model?",
+        text: "A company is using Amazon DynamoDB. Which task is the company's responsibility, according to the AWS shared responsibility model?",
         options: [
         "Patch the operating system.",
         "Provision hosts",
@@ -1199,7 +1199,7 @@ export const awsCCPQuestions2: Question[] = [
     ],
         correctAnswer: 2,
         correctAnswers: [2],
-        explanation: "Managing database access permissions is the customer\'s responsibility. Customers are responsible for defining and managing access permissions to their DynamoDB tables. (p. 12)"
+        explanation: "Managing database access permissions is the customer's responsibility. Customers are responsible for defining and managing access permissions to their DynamoDB tables. (p. 12)"
     },
     {
         id: 25,
@@ -1359,7 +1359,7 @@ export const awsCCPQuestions2: Question[] = [
     },
     {
         id: 37,
-        text: "A company wants to run a graph query that provides credit card users\' names, addresses, and transactions. The company wants the graph to show if the names, addresses, and transactions indicates possible fraud. Which AWS database service will meet these requirements?",
+        text: "A company wants to run a graph query that provides credit card users' names, addresses, and transactions. The company wants the graph to show if the names, addresses, and transactions indicates possible fraud. Which AWS database service will meet these requirements?",
         options: [
         "Amazon DocumentDB (with MongoDB compatibility)",
         "Amazon Timestream",
@@ -1477,7 +1477,7 @@ export const awsCCPQuestions2: Question[] = [
     },
     {
         id: 46,
-        text: "Which AWS service or feature allows a user to establish a dedicated network connection between a company\'s on-premises data center and the AWS Cloud?",
+        text: "Which AWS service or feature allows a user to establish a dedicated network connection between a company's on-premises data center and the AWS Cloud?",
         options: [
         "AWS Direct Connect",
         "VPC peering",
@@ -1486,7 +1486,7 @@ export const awsCCPQuestions2: Question[] = [
     ],
         correctAnswer: 0,
         correctAnswers: [0],
-        explanation: "AWS Direct Connect allows a user to establish a dedicated network connection between a company\'s on-premises data center and the AWS Cloud. (p. 22)"
+        explanation: "AWS Direct Connect allows a user to establish a dedicated network connection between a company's on-premises data center and the AWS Cloud. (p. 22)"
     },
     {
         id: 47,
