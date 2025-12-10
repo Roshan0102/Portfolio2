@@ -1,17 +1,28 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import QuizInterface from './QuizInterface';
-import { awsCCPQuestions, awsCCPQuestions2, awsCCPQuestions3 } from '../../data/mockTests';
+import {
+    awsCCPQuestions, awsCCPQuestions2, awsCCPQuestions3, awsCCPQuestions4,
+    awsCCPQuestions5, awsCCPQuestions6, awsCCPQuestions7, awsCCPQuestions8,
+    awsCCPQuestions9, awsCCPQuestions10, awsCCPQuestions11
+} from '../../data/mockTests';
 
 const MockTestRunner: React.FC = () => {
     const { testId } = useParams();
     const navigate = useNavigate();
 
     let questions = awsCCPQuestions;
-    if (testId === '2') {
-        questions = awsCCPQuestions2;
-    } else if (testId === '3') {
-        questions = awsCCPQuestions3;
+    switch (testId) {
+        case '2': questions = awsCCPQuestions2; break;
+        case '3': questions = awsCCPQuestions3; break;
+        case '4': questions = awsCCPQuestions4; break;
+        case '5': questions = awsCCPQuestions5; break;
+        case '6': questions = awsCCPQuestions6; break;
+        case '7': questions = awsCCPQuestions7; break;
+        case '8': questions = awsCCPQuestions8; break;
+        case '9': questions = awsCCPQuestions9; break;
+        case '10': questions = awsCCPQuestions10; break;
+        case '11': questions = awsCCPQuestions11; break;
     }
 
     if (!questions || questions.length === 0) {

@@ -10,6 +10,14 @@ const AWSCCPMockTests: React.FC = () => {
         { id: 1, name: "Mock Test 1", questions: 67, duration: "90 mins" },
         { id: 2, name: "Mock Test 2", questions: 73, duration: "90 mins" },
         { id: 3, name: "Mock Test 3", questions: 70, duration: "90 mins" },
+        { id: 4, name: "Mock Test 4", questions: 70, duration: "90 mins" },
+        { id: 5, name: "Mock Test 5", questions: 70, duration: "90 mins" },
+        { id: 6, name: "Mock Test 6", questions: 70, duration: "90 mins" },
+        { id: 7, name: "Mock Test 7", questions: 70, duration: "90 mins" },
+        { id: 8, name: "Mock Test 8", questions: 70, duration: "90 mins" },
+        { id: 9, name: "Mock Test 9", questions: 70, duration: "90 mins" },
+        { id: 10, name: "Mock Test 10", questions: 70, duration: "90 mins" },
+        { id: 11, name: "Mock Test 11", questions: 29, duration: "45 mins" },
     ];
 
     return (
