@@ -48,96 +48,169 @@ def parse_questions(text):
         if not chunk_lines:
             return None
             
-        full_text = " ".join(chunk_lines).strip()
+        # Join with newline to preserve structure
+        full_text_newline = "\n".join(chunk_lines)
         
         # 1. Extract ID
-        # Match "123. " at start
-        id_match = re.match(r'^(\d+)\.\s+(.*)', full_text)
+        # Try to match ID at the beginning of the text
+        id_match = re.match(r'^(\d+)\.\s+(.*)', full_text_newline.replace('\n', ' '), re.DOTALL)
         if not id_match:
-            return None
-            
-        q_id = int(id_match.group(1))
-        content = id_match.group(2)
+             # Try matching just the first line
+             id_match = re.match(r'^(\d+)\.\s+(.*)', chunk_lines[0])
+             if not id_match:
+                 return None
         
-        # 2. Split Question and Rest (Options/Explanation)
-        # User rule: "put the texts before the text 'Options:' in the question"
-        if "Options:" in content:
-            parts = content.split("Options:", 1)
-            q_text = parts[0].strip()
-            rest = parts[1].strip()
-        else:
-            # Fallback if "Options:" is missing (maybe formatted differently)
-            # We'll assume everything is question text if no options found
-            # But usually these files have options.
-            q_text = content
-            rest = ""
-
-        # 3. Extract Explanation
-        # User rule: "from the text starts with 'Explanation:' , you can put in the explanation area"
+        q_id = int(id_match.group(1))
+        
+        # 2. Split Question, Options, Explanation
+        q_text = ""
+        options_part = ""
         explanation = ""
-        if "Explanation:" in rest:
-            parts = rest.split("Explanation:", 1)
-            options_part = parts[0].strip()
-            explanation = parts[1].strip()
+        
+        # Find "Options:"
+        options_idx = -1
+        explanation_idx = -1
+        
+        # Normalize lines for search
+        norm_lines = [l.lower() for l in chunk_lines]
+        
+        for i, line in enumerate(norm_lines):
+            if "options:" in line:
+                options_idx = i
+                break
+        
+        if options_idx != -1:
+            # Handle the line with "Options:"
+            opt_line = chunk_lines[options_idx]
+            # Split case-insensitive
+            idx = opt_line.lower().find("options:")
+            pre_opt = opt_line[:idx].strip()
+            post_opt = opt_line[idx+len("options:"):].strip()
+            
+            q_lines = chunk_lines[:options_idx]
+            if pre_opt:
+                q_lines.append(pre_opt)
+            
+            q_text = " ".join(q_lines).strip()
+            # Remove ID from q_text if it's there
+            q_text = re.sub(r'^\d+\.\s+', '', q_text).strip()
+            
+            # Options start from post_opt + subsequent lines
+            options_start_text = post_opt
+            
+            # Now find Explanation after options_idx
+            for i in range(options_idx, len(chunk_lines)):
+                line = chunk_lines[i]
+                if "explanation:" in line.lower():
+                    explanation_idx = i
+                    break
+            
+            if explanation_idx != -1:
+                # Handle the line with "Explanation:"
+                expl_line = chunk_lines[explanation_idx]
+                idx = expl_line.lower().find("explanation:")
+                pre_expl = expl_line[:idx].strip()
+                post_expl = expl_line[idx+len("explanation:"):].strip()
+
+                # Options lines
+                opt_lines = []
+                if options_idx == explanation_idx:
+                    # Everything is on one line?
+                    # "Options: ... Explanation: ..."
+                    # We already split "Options:" above.
+                    # So options_start_text contains " ... Explanation: ..."
+                    if "explanation:" in options_start_text.lower():
+                         idx = options_start_text.lower().find("explanation:")
+                         opt_content = options_start_text[:idx].strip()
+                         expl_content = options_start_text[idx+len("explanation:"):].strip()
+                         options_part = opt_content
+                         explanation = expl_content
+                    else:
+                         options_part = options_start_text
+                else:
+                    # Options start text
+                    if options_start_text:
+                        opt_lines.append(options_start_text)
+                    
+                    # Lines between
+                    opt_lines.extend(chunk_lines[options_idx+1:explanation_idx])
+                    
+                    # Part before "Explanation:" on that line
+                    if pre_expl:
+                        opt_lines.append(pre_expl)
+                    
+                    options_part = "\n".join(opt_lines)
+                    
+                    # Explanation is post_expl + subsequent lines
+                    expl_lines = [post_expl]
+                    expl_lines.extend(chunk_lines[explanation_idx+1:])
+                    explanation = " ".join(expl_lines).strip()
+            else:
+                # No explanation found
+                opt_lines = []
+                if options_start_text:
+                    opt_lines.append(options_start_text)
+                opt_lines.extend(chunk_lines[options_idx+1:])
+                options_part = "\n".join(opt_lines)
+                explanation = ""
         else:
-            options_part = rest
-            explanation = "" # Leave empty if not found
+            # No "Options:" found?
+            q_text = " ".join(chunk_lines).strip()
+            q_text = re.sub(r'^\d+\.\s+', '', q_text).strip()
+            options_part = ""
+            explanation = ""
 
         # 4. Parse Options
-        # User rule: "A.", "B.", "C.", "D.", "E."
-        # We look for these markers in options_part
         options = []
         correct_indices = []
         
-        # We need to split options_part by these markers
-        # We can find indices of " A. ", " B. ", etc.
-        # Note: The text might be "A. Option text B. Option text"
-        # or "A. Option text" (at start)
+        # Check for markers A., B. etc.
+        has_markers = False
+        if "A." in options_part and "B." in options_part:
+             if re.search(r'A\.\s', options_part) and re.search(r'B\.\s', options_part):
+                 has_markers = True
         
-        # Add space at start to match " A." pattern easily
-        search_blob = " " + options_part
-        
-        markers = ["A.", "B.", "C.", "D.", "E.", "F."]
-        found_markers = []
-        
-        for m in markers:
-            # Look for " A." or " B." etc
-            # We use regex to ensure it's a distinct label
-            # pattern = r'\s' + re.escape(m)
-            idx = search_blob.find(" " + m)
-            if idx != -1:
-                found_markers.append((idx, m))
-        
-        found_markers.sort()
-        
-        for i in range(len(found_markers)):
-            start = found_markers[i][0] + len(found_markers[i][1]) + 1 # +1 for the leading space we added
+        if has_markers:
+            # Use existing marker logic
+            search_blob = " " + options_part.replace('\n', ' ')
+            markers = ["A.", "B.", "C.", "D.", "E.", "F."]
+            found_markers = []
             
-            if i < len(found_markers) - 1:
-                end = found_markers[i+1][0]
-            else:
-                end = len(search_blob)
+            for m in markers:
+                idx = search_blob.find(" " + m)
+                if idx != -1:
+                    found_markers.append((idx, m))
+            found_markers.sort()
             
-            opt_text = search_blob[start:end].strip()
-            
-            # Check for correctness
-            # User didn't specify marker, but previous files used " - Correct" or " - correct"
-            is_correct = False
-            if " - Correct" in opt_text:
-                is_correct = True
-                opt_text = opt_text.replace(" - Correct", "").strip()
-            elif " - correct" in opt_text:
-                is_correct = True
-                opt_text = opt_text.replace(" - correct", "").strip()
-            
-            # Clean up trailing punctuation if needed
-            # opt_text = opt_text.rstrip('.,') 
-            
-            options.append(opt_text)
-            if is_correct:
-                correct_indices.append(i)
-        
-        # Construct Question Object
+            for i in range(len(found_markers)):
+                start = found_markers[i][0] + len(found_markers[i][1]) + 1
+                end = found_markers[i+1][0] if i < len(found_markers) - 1 else len(search_blob)
+                opt_text = search_blob[start:end].strip()
+                
+                is_correct = False
+                if "-correct" in opt_text.lower() or "- correct" in opt_text.lower():
+                    is_correct = True
+                    opt_text = re.sub(r'-\s*correct', '', opt_text, flags=re.IGNORECASE).strip()
+                
+                options.append(opt_text)
+                if is_correct:
+                    correct_indices.append(i)
+        else:
+            # Line-based options
+            opt_lines = options_part.split('\n')
+            for line in opt_lines:
+                line = line.strip()
+                if not line: continue
+                
+                is_correct = False
+                if "-correct" in line.lower() or "- correct" in line.lower():
+                    is_correct = True
+                    line = re.sub(r'-\s*correct', '', line, flags=re.IGNORECASE).strip()
+                
+                options.append(line)
+                if is_correct:
+                    correct_indices.append(len(options)-1)
+
         return {
             "id": q_id,
             "text": q_text,
