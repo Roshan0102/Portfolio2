@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import QuizInterface from './QuizInterface';
-import { awsCCPQuestions, awsCCPQuestions2 } from '../../data/mockTests';
+import { awsCCPQuestions, awsCCPQuestions2, awsCCPQuestions3 } from '../../data/mockTests';
 
 const MockTestRunner: React.FC = () => {
     const { testId } = useParams();
@@ -10,6 +10,8 @@ const MockTestRunner: React.FC = () => {
     let questions = awsCCPQuestions;
     if (testId === '2') {
         questions = awsCCPQuestions2;
+    } else if (testId === '3') {
+        questions = awsCCPQuestions3;
     }
 
     if (!questions || questions.length === 0) {
