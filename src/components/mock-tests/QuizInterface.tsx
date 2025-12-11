@@ -8,8 +8,9 @@ import FlagIcon from '@mui/icons-material/Flag';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardIcon from '@mui/icons-material/Keyboard';
+import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import Confetti from 'react-confetti';
-import QuestionAIChat from './QuestionAIChat';
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
 
 interface Question {
     id: number;
@@ -52,6 +53,11 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
     const [isFinished, setIsFinished] = useState(false);
     const [showMobilePalette, setShowMobilePalette] = useState(false);
     const [windowSize, setWindowSize] = useState({ width: window.innerWidth, height: window.innerHeight });
+
+    // Report Dialog State
+    const [reportOpen, setReportOpen] = useState(false);
+    const [reportText, setReportText] = useState('');
+    const [isSendingReport, setIsSendingReport] = useState(false);
 
     // Update window size for confetti
     useEffect(() => {
@@ -128,10 +134,46 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
         }
     };
 
+    const handleReportSubmit = async () => {
+        if (!reportText.trim()) return;
+        setIsSendingReport(true);
+
+        try {
+            await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    access_key: '196d8c62-340f-4232-8bdf-e45c96448232',
+                    subject: `Mock Test Report: ${title} - Q${currentQuestion + 1}`,
+                    message: `
+                        Mock Test: ${title}
+                        Question Number: ${currentQuestion + 1}
+                        Question Text: ${question.text}
+                        
+                        User Report:
+                        ${reportText}
+                    `,
+                    from_name: 'Mock Test User'
+                })
+            });
+            alert('Report sent successfully. Thank you for your feedback!');
+            setReportOpen(false);
+            setReportText('');
+        } catch (error) {
+            console.error('Error sending report:', error);
+            alert('Failed to send report. Please try again later.');
+        } finally {
+            setIsSendingReport(false);
+        }
+    };
+
     // Keyboard Shortcuts
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if (isFinished) return;
+            if (isFinished || reportOpen) return; // Disable shortcuts when report dialog is open
 
             const key = e.key.toUpperCase();
             // Options A-F
@@ -157,7 +199,7 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentQuestion, isFinished, userAnswers, isSubmitted, question]);
+    }, [currentQuestion, isFinished, userAnswers, isSubmitted, question, reportOpen]);
 
     const jumpToQuestion = (index: number) => {
         // Allow jumping only if NOT submitted (so they can answer flagged/skipped ones)
@@ -416,13 +458,23 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
                                 <span className="inline-block px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium">
                                     {categorizeQuestion(question.text)}
                                 </span>
-                                <button
-                                    onClick={handleFlag}
-                                    className={`flex items-center gap-1 text-sm font-medium transition-colors ${flaggedQuestions.has(currentQuestion) ? 'text-yellow-500' : 'text-gray-400 hover:text-gray-600'}`}
-                                >
-                                    <FlagIcon fontSize="small" />
-                                    {flaggedQuestions.has(currentQuestion) ? 'Flagged' : 'Flag for Review'}
-                                </button>
+                                <div className="flex items-center gap-4">
+                                    <button
+                                        onClick={() => setReportOpen(true)}
+                                        className="flex items-center gap-1 text-sm font-medium text-gray-400 hover:text-red-500 transition-colors"
+                                        title="Report an issue with this question"
+                                    >
+                                        <ReportProblemIcon fontSize="small" />
+                                        <span className="hidden sm:inline">Report</span>
+                                    </button>
+                                    <button
+                                        onClick={handleFlag}
+                                        className={`flex items-center gap-1 text-sm font-medium transition-colors ${flaggedQuestions.has(currentQuestion) ? 'text-yellow-500' : 'text-gray-400 hover:text-gray-600'}`}
+                                    >
+                                        <FlagIcon fontSize="small" />
+                                        {flaggedQuestions.has(currentQuestion) ? 'Flagged' : 'Flag for Review'}
+                                    </button>
+                                </div>
                             </div>
 
                             <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-8 leading-relaxed">
@@ -518,18 +570,6 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
                                         <p className="text-gray-700 leading-relaxed mb-4">
                                             {question.explanation || "No explanation provided."}
                                         </p>
-
-                                        {/* AI Tutor Integration */}
-                                        <QuestionAIChat
-                                            questionText={question.text}
-                                            options={question.options}
-                                            correctAnswer={
-                                                isMultiSelect
-                                                    ? (question.correctAnswers || []).map(i => question.options[i]).join(', ')
-                                                    : question.options[question.correctAnswer]
-                                            }
-                                            explanation={question.explanation}
-                                        />
                                     </motion.div>
                                 )}
                             </AnimatePresence>
@@ -583,6 +623,37 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
                         </>
                     )}
                 </AnimatePresence>
+
+                {/* Report Dialog */}
+                <Dialog open={reportOpen} onClose={() => setReportOpen(false)} maxWidth="sm" fullWidth>
+                    <DialogTitle>Report Question Issue</DialogTitle>
+                    <DialogContent>
+                        <p className="text-gray-600 mb-4 text-sm">
+                            Found an error? Let us know. We'll review it and fix it.
+                        </p>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="report"
+                            label="Describe the issue (e.g., wrong answer, typo)"
+                            type="text"
+                            fullWidth
+                            multiline
+                            rows={4}
+                            variant="outlined"
+                            value={reportText}
+                            onChange={(e) => setReportText(e.target.value)}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => setReportOpen(false)} color="inherit">
+                            Cancel
+                        </Button>
+                        <Button onClick={handleReportSubmit} color="error" variant="contained" disabled={isSendingReport || !reportText.trim()}>
+                            {isSendingReport ? 'Sending...' : 'Send Report'}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
         </section>
     );

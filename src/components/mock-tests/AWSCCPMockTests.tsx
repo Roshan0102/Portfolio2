@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const AWSCCPMockTests: React.FC = () => {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const mockTests = [
         { id: 1, name: "Mock Test 1", questions: 67, duration: "90 mins" },
@@ -33,13 +37,16 @@ const AWSCCPMockTests: React.FC = () => {
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="mb-12"
+                    className="mb-12 text-center"
                 >
                     <h2 className="text-3xl md:text-4xl font-bold mb-3 text-gray-800">
                         AWS Certified Cloud Practitioner
                     </h2>
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 mb-4">
                         Select a mock test to begin practice.
+                    </p>
+                    <p className="text-sm text-red-500 bg-red-50 p-3 rounded-lg border border-red-100 inline-block">
+                        Disclaimer: These mock tests are for practice purposes only and are not affiliated with AWS.
                     </p>
                 </motion.div>
 
