@@ -139,7 +139,7 @@ const Certifications: React.FC = () => {
                     onClick={() => navigate('/mock-tests/aws-ccp')}
                     className="mt-4 w-full py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all"
                   >
-                    Take Mock Test
+                    Study Materials and Mock Test
                   </motion.button>
                 )}
               </div>
