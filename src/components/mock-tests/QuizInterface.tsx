@@ -65,36 +65,6 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
     const currentSelected = userAnswers[currentQuestion] || [];
     const isSubmitted = submittedQuestions.has(currentQuestion);
 
-    // Keyboard Shortcuts
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (isFinished) return;
-
-            const key = e.key.toUpperCase();
-            // Options A-F
-            if (['A', 'B', 'C', 'D', 'E', 'F'].includes(key)) {
-                if (!isSubmitted) {
-                    const index = key.charCodeAt(0) - 65; // A=0, B=1, etc.
-                    if (index < question.options.length) {
-                        handleOptionClick(index);
-                    }
-                }
-            }
-            // Enter to Submit or Next
-            else if (e.key === 'Enter') {
-                if (isSubmitted) {
-                    handleNext();
-                } else {
-                    handleSubmitAnswer();
-                }
-            }
-            // 'F' key for Flag (optional, but might conflict with option F if exists. Let's stick to mouse for flag or a modifier)
-        };
-
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [currentQuestion, isFinished, userAnswers, isSubmitted, question]);
-
     const handleOptionClick = (index: number) => {
         if (isFinished || isSubmitted) return;
 
@@ -157,6 +127,37 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
             setIsFinished(true);
         }
     };
+
+    // Keyboard Shortcuts
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (isFinished) return;
+
+            const key = e.key.toUpperCase();
+            // Options A-F
+            if (['A', 'B', 'C', 'D', 'E', 'F'].includes(key)) {
+                if (!isSubmitted) {
+                    const index = key.charCodeAt(0) - 65; // A=0, B=1, etc.
+                    if (index < question.options.length) {
+                        handleOptionClick(index);
+                    }
+                }
+            }
+            // Enter to Submit or Next
+            else if (e.key === 'Enter') {
+                if (isSubmitted) {
+                    handleNext();
+                } else {
+                    handleSubmitAnswer();
+                }
+            }
+            // 'F' key for Flag (optional, but might conflict with option F if exists. Let's stick to mouse for flag or a modifier)
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentQuestion, isFinished, userAnswers, isSubmitted, question]);
 
     const jumpToQuestion = (index: number) => {
         // Allow jumping only if NOT submitted (so they can answer flagged/skipped ones)
