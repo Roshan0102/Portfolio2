@@ -47,23 +47,21 @@ const QuestionAIChat: React.FC<QuestionAIChatProps> = ({ questionText, options, 
         setIsLoading(true);
 
         try {
-            // Construct a context-rich prompt
-            const contextPrompt = `
+            const response = await fetch('/.netlify/functions/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message: text,
+                    context: `
 Context: I am studying for the AWS Cloud Practitioner exam.
 Question: "${questionText}"
 Options: ${options.map((opt, i) => `${String.fromCharCode(65 + i)}. ${opt}`).join(', ')}
 Correct Answer: ${correctAnswer}
 Explanation: "${explanation}"
 
-User Question: ${text}
-
 Please answer the user's question specifically about this AWS concept. Be concise, helpful, and encouraging.
-            `.trim();
-
-            const response = await fetch('/.netlify/functions/chat', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: contextPrompt }),
+                    `.trim()
+                }),
             });
 
             const data = await response.json();
