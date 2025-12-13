@@ -247,6 +247,35 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
         return { score, categoryStats };
     }, [isFinished, questions, userAnswers]);
 
+    // Send results email when finished
+    useEffect(() => {
+        if (isFinished && results) {
+            const percentage = Math.round((results.score / questions.length) * 100);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    access_key: '196d8c62-340f-4232-8bdf-e45c96448232',
+                    subject: `Mock Test Completed: ${title}`,
+                    message: `
+                        Mock Test: ${title}
+                        Score: ${results.score} / ${questions.length} (${percentage}%)
+                        
+                        Category Breakdown:
+                        ${Object.entries(results.categoryStats).map(([cat, stats]) =>
+                        `- ${cat}: ${stats.correct}/${stats.total} (${Math.round((stats.correct / stats.total) * 100)}%)`
+                    ).join('\n')}
+                    `,
+                    from_name: 'Mock Test System'
+                })
+            }).catch(err => console.error('Failed to send results email:', err));
+        }
+    }, [isFinished, results, title, questions.length]);
+
     // Check correctness for current question (for immediate feedback)
     const isCurrentCorrect = useMemo(() => {
         if (!isSubmitted) return false;
