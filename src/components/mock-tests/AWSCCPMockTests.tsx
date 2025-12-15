@@ -46,6 +46,25 @@ const AWSCCPMockTests: React.FC = () => {
         { name: "WAF Pillars", type: "image", file: "WAF Pillars.png" },
     ];
 
+    const handleStartTest = (testId: number, testName: string) => {
+        // Send notification email
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                access_key: '196d8c62-340f-4232-8bdf-e45c96448232',
+                subject: `Mock Test Started: ${testName}`,
+                message: `User started ${testName} at ${new Date().toLocaleString()}`,
+                from_name: 'Mock Test System'
+            })
+        }).catch(err => console.error('Failed to send start test email:', err));
+
+        navigate(`/mock-tests/aws-ccp/${testId}`);
+    };
+
     return (
         <section className="py-20 bg-white min-h-screen pt-24 relative">
             <div className="section-container">
@@ -118,7 +137,7 @@ const AWSCCPMockTests: React.FC = () => {
                                         </p>
                                     </div>
                                     <button
-                                        onClick={() => navigate(`/mock-tests/aws-ccp/${test.id}`)}
+                                        onClick={() => handleStartTest(test.id, test.name)}
                                         className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto"
                                     >
                                         Start Test
