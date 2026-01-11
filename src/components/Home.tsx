@@ -146,7 +146,7 @@ const Home: React.FC = () => {
                   <GitHubIcon /> GitHub
                 </a>
                 <a
-                  href="/assets/Roshan_Cloud_Engineer.pdf"
+                  href="/assets/Roshan's Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-6 py-3 md:px-8 md:py-4 rounded-xl md:rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold shadow-lg shadow-purple-500/30 hover:opacity-90 hover:scale-105 transition-all duration-300 flex items-center gap-2 text-sm md:text-base"
