@@ -438,7 +438,7 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
     );
 
     return (
-        <section className="py-20 bg-gray-50 dark:bg-gray-800/80 transition-colors min-h-screen pt-24">
+        <section className="py-20 bg-gray-50 dark:bg-gray-800/80 transition-colors min-h-screen pt-24 relative z-10">
             <div className="w-full px-4 lg:px-8 flex gap-8 items-start justify-center">
 
                 {/* Main Content Area */}
