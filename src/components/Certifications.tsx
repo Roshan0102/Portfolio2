@@ -15,6 +15,12 @@ const Certifications: React.FC = () => {
   const navigate = useNavigate();
   const certifications: Certification[] = [
     {
+      title: "AWS Certified Solutions Architect - Associate",
+      issuer: "Amazon Web Services",
+      image: "https://images.ctfassets.net/xz1dnu24egyd/72URY4Vg59wKsYMpTqrMel/194347274767abce3c04be7be72a75a3/AWS-Logo__1_.png",
+      url: "https://drive.google.com/file/d/1o5GcItRrwzwO7E9IYN51Zp4S_nxIUzOB/view?usp=sharing"
+    },
+    {
       title: "AWS Certified Cloud Practitioner",
       issuer: "Amazon Web Services",
       image: "https://images.ctfassets.net/xz1dnu24egyd/72URY4Vg59wKsYMpTqrMel/194347274767abce3c04be7be72a75a3/AWS-Logo__1_.png",
@@ -41,7 +47,7 @@ const Certifications: React.FC = () => {
   ];
 
   return (
-    <section id="certifications" className="py-20 bg-white">
+    <section id="certifications" className="py-20 bg-transparent relative z-10 transition-colors">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -75,7 +81,7 @@ const Certifications: React.FC = () => {
               }}
               className="absolute w-6 h-6 -right-4 -bottom-1 rounded-full border-4 border-purple-500"
             />
-            <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-600 via-purple-400 to-blue-600 bg-clip-text text-transparent inline-block animate-shine">
+            <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-600 via-purple-400 to-blue-600 bg-clip-text pb-2 text-transparent inline-block animate-shine">
               Certifications
             </h2>
             <div className="absolute w-full h-0.5 bg-gray-200 bottom-0 left-0">
@@ -88,7 +94,7 @@ const Certifications: React.FC = () => {
               />
             </div>
           </div>
-          <p className="text-gray-600 max-w-2xl mx-auto mt-5">
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-5">
             Professional certifications that validate my expertise and commitment to continuous learning
           </p>
         </motion.div>
@@ -101,7 +107,7 @@ const Certifications: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 hover:border-purple-300"
+              className="bg-gray-50 dark:bg-gray-800/80 transition-colors rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 dark:border-gray-700 hover:border-purple-300"
             >
               <div className="relative h-48">
                 <img
@@ -114,21 +120,21 @@ const Certifications: React.FC = () => {
                     href={cert.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-gray-800 hover:bg-gray-100 transition-all duration-300 transform hover:scale-105"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-gray-900 transition-colors text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:bg-gray-800 transition-colors transition-all duration-300 transform hover:scale-105"
                   >
                     <LaunchIcon /> View Certificate
                   </a>
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 text-gray-800">
+                <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200">
                   {cert.title}
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-600 dark:text-gray-400">
                   Issued by {cert.issuer}
                 </p>
                 <div className="mt-4">
-                  <span className="inline-flex items-center gap-1 bg-primary px-3 py-1 rounded-full text-sm text-gray-800">
+                  <span className="inline-flex items-center gap-1 bg-blue-50 dark:bg-blue-900/40 border border-blue-100 dark:border-blue-800/50 px-3 py-1 rounded-full text-sm text-blue-700 dark:text-blue-300">
                     <VerifiedIcon fontSize="small" /> Verified
                   </span>
                 </div>

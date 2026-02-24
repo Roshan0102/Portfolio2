@@ -296,35 +296,35 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
         const isPassed = percentage >= 70;
 
         return (
-            <section className="py-20 bg-white min-h-screen pt-24 relative overflow-hidden">
+            <section className="py-20 bg-white dark:bg-gray-900 transition-colors min-h-screen pt-24 relative overflow-hidden">
                 {isPassed && <Confetti width={windowSize.width} height={windowSize.height} recycle={false} numberOfPieces={500} />}
 
                 <div className="section-container max-w-4xl">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8"
+                        className="bg-white dark:bg-gray-900 transition-colors rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-8"
                     >
                         <div className="text-center mb-10">
                             <div className={`w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 ${isPassed ? 'bg-green-100' : 'bg-red-100'}`}>
                                 {isPassed ? <CheckCircleIcon className="text-green-600 text-6xl" /> : <CancelIcon className="text-red-600 text-6xl" />}
                             </div>
-                            <h2 className="text-4xl font-bold text-gray-800 mb-2">{isPassed ? 'Congratulations!' : 'Keep Practicing!'}</h2>
-                            <p className="text-gray-600 text-xl">
+                            <h2 className="text-4xl font-bold text-gray-800 dark:text-gray-200 mb-2">{isPassed ? 'Congratulations!' : 'Keep Practicing!'}</h2>
+                            <p className="text-gray-600 dark:text-gray-400 text-xl">
                                 You scored <span className={`font-bold text-3xl ${isPassed ? 'text-green-600' : 'text-red-600'}`}>{percentage}%</span> ({results.score}/{questions.length})
                             </p>
                         </div>
 
                         {/* Performance Breakdown */}
                         <div className="grid md:grid-cols-2 gap-6 mb-10">
-                            <div className="bg-gray-50 p-6 rounded-xl">
-                                <h3 className="text-lg font-bold text-gray-800 mb-4">Performance Breakdown</h3>
+                            <div className="bg-gray-50 dark:bg-gray-800/80 transition-colors p-6 rounded-xl">
+                                <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4">Performance Breakdown</h3>
                                 <div className="space-y-4">
                                     {Object.entries(results.categoryStats).map(([category, stats]) => (
                                         <div key={category}>
                                             <div className="flex justify-between text-sm mb-1">
-                                                <span className="text-gray-700 font-medium">{category}</span>
-                                                <span className="text-gray-500">{stats.correct}/{stats.total}</span>
+                                                <span className="text-gray-700 dark:text-gray-300 font-medium">{category}</span>
+                                                <span className="text-gray-500 dark:text-gray-400">{stats.correct}/{stats.total}</span>
                                             </div>
                                             <div className="w-full bg-gray-200 rounded-full h-2.5">
                                                 <div
@@ -352,7 +352,7 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
                                 </button>
                                 <button
                                     onClick={() => navigate('/mock-tests/aws-ccp')}
-                                    className="w-full py-4 bg-white text-gray-700 border-2 border-gray-200 rounded-xl font-bold hover:border-gray-300 hover:bg-gray-50 transition-all text-lg"
+                                    className="w-full py-4 bg-white dark:bg-gray-900 transition-colors text-gray-700 dark:text-gray-300 border-2 border-gray-200 dark:border-gray-700 rounded-xl font-bold hover:border-gray-300 hover:bg-gray-50 dark:bg-gray-800/80 transition-colors transition-all text-lg"
                                 >
                                     Back to Mock Tests
                                 </button>
@@ -368,10 +368,10 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
     const PaletteContent = () => (
         <>
             <div className="flex justify-between items-center mb-6">
-                <h3 className="text-lg font-bold text-gray-800">Question Palette</h3>
+                <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200">Question Palette</h3>
                 {/* Close button only for mobile drawer */}
                 <button onClick={() => setShowMobilePalette(false)} className="lg:hidden">
-                    <CloseIcon className="text-gray-500 hover:text-gray-800" />
+                    <CloseIcon className="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:text-gray-200" />
                 </button>
             </div>
 
@@ -381,7 +381,7 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
                     const isFlagged = flaggedQuestions.has(idx);
                     const isCurrent = currentQuestion === idx;
 
-                    let bgClass = 'bg-gray-100 text-gray-600 hover:bg-gray-200';
+                    let bgClass = 'bg-gray-100 dark:bg-gray-800 transition-colors text-gray-600 dark:text-gray-400 hover:bg-gray-200';
 
                     if (isCurrent) {
                         bgClass = 'bg-blue-600 text-white ring-2 ring-blue-300';
@@ -417,7 +417,7 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
                 })}
             </div>
 
-            <div className="mt-8 space-y-3 text-sm text-gray-600">
+            <div className="mt-8 space-y-3 text-sm text-gray-600 dark:text-gray-400">
                 <div className="flex items-center gap-2">
                     <div className="w-4 h-4 bg-blue-600 rounded"></div> Current
                 </div>
@@ -431,14 +431,14 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
                     <div className="w-4 h-4 bg-yellow-100 border border-yellow-300 rounded"></div> Flagged
                 </div>
                 <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 bg-gray-100 rounded"></div> Unanswered
+                    <div className="w-4 h-4 bg-gray-100 dark:bg-gray-800 transition-colors rounded"></div> Unanswered
                 </div>
             </div>
         </>
     );
 
     return (
-        <section className="py-20 bg-gray-50 min-h-screen pt-24">
+        <section className="py-20 bg-gray-50 dark:bg-gray-800/80 transition-colors min-h-screen pt-24">
             <div className="w-full px-4 lg:px-8 flex gap-8 items-start justify-center">
 
                 {/* Main Content Area */}
@@ -447,13 +447,13 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
                     <div className="flex justify-between items-center mb-6">
                         <button
                             onClick={() => navigate('/mock-tests/aws-ccp')}
-                            className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors"
+                            className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors"
                         >
                             <ArrowBackIcon /> Exit
                         </button>
 
                         <div className="flex items-center gap-4">
-                            <span className="text-gray-600 font-medium">
+                            <span className="text-gray-600 dark:text-gray-400 font-medium">
                                 Question {currentQuestion + 1} / {questions.length}
                             </span>
                             {/* Mobile Menu Button */}
@@ -471,10 +471,10 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
                         key={currentQuestion}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden"
+                        className="bg-white dark:bg-gray-900 transition-colors rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden"
                     >
                         {/* Progress Bar */}
-                        <div className="h-2 bg-gray-100 w-full">
+                        <div className="h-2 bg-gray-100 dark:bg-gray-800 transition-colors w-full">
                             <motion.div
                                 className="h-full bg-blue-600"
                                 initial={{ width: `${((currentQuestion) / questions.length) * 100}%` }}
@@ -498,7 +498,7 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
                                     </button>
                                     <button
                                         onClick={handleFlag}
-                                        className={`flex items-center gap-1 text-sm font-medium transition-colors ${flaggedQuestions.has(currentQuestion) ? 'text-yellow-500' : 'text-gray-400 hover:text-gray-600'}`}
+                                        className={`flex items-center gap-1 text-sm font-medium transition-colors ${flaggedQuestions.has(currentQuestion) ? 'text-yellow-500' : 'text-gray-400 hover:text-gray-600 dark:text-gray-400'}`}
                                     >
                                         <FlagIcon fontSize="small" />
                                         {flaggedQuestions.has(currentQuestion) ? 'Flagged' : 'Flag for Review'}
@@ -506,7 +506,7 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
                                 </div>
                             </div>
 
-                            <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-8 leading-relaxed">
+                            <h3 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-200 mb-8 leading-relaxed">
                                 {question.text}
                             </h3>
 
@@ -515,10 +515,10 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
                                     const isSelected = currentSelected.includes(index);
                                     const letter = String.fromCharCode(65 + index); // A, B, C...
 
-                                    let borderClass = 'border-gray-200 hover:border-blue-200 hover:bg-gray-50';
-                                    let bgClass = 'bg-white';
-                                    let textClass = 'text-gray-700';
-                                    let iconBgClass = 'bg-gray-100 text-gray-500';
+                                    let borderClass = 'border-gray-200 dark:border-gray-700 hover:border-blue-200 hover:bg-gray-50 dark:bg-gray-800/80 transition-colors';
+                                    let bgClass = 'bg-white dark:bg-gray-900 transition-colors';
+                                    let textClass = 'text-gray-700 dark:text-gray-300';
+                                    let iconBgClass = 'bg-gray-100 dark:bg-gray-800 transition-colors text-gray-500 dark:text-gray-400';
 
                                     if (isSelected) {
                                         borderClass = 'border-blue-500';
@@ -543,7 +543,7 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
                                             textClass = 'text-red-900 font-medium';
                                             iconBgClass = 'bg-red-500 text-white';
                                         } else {
-                                            borderClass = 'border-gray-100 opacity-50';
+                                            borderClass = 'border-gray-100 dark:border-gray-800 opacity-50';
                                         }
                                     }
 
@@ -596,7 +596,7 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
                                                 {isCurrentCorrect ? 'Correct Answer!' : 'Incorrect Answer'}
                                             </h4>
                                         </div>
-                                        <p className="text-gray-700 leading-relaxed mb-4">
+                                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                                             {question.explanation || "No explanation provided."}
                                         </p>
                                     </motion.div>
@@ -604,7 +604,7 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
                             </AnimatePresence>
                         </div>
 
-                        <div className="bg-gray-50 p-6 border-t border-gray-100 flex justify-end items-center gap-4">
+                        <div className="bg-gray-50 dark:bg-gray-800/80 transition-colors p-6 border-t border-gray-100 dark:border-gray-800 flex justify-end items-center gap-4">
                             {!isSubmitted ? (
                                 <button
                                     onClick={handleSubmitAnswer}
@@ -625,7 +625,7 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
                 </div>
 
                 {/* Desktop Sidebar Palette */}
-                <div className="hidden lg:block w-80 sticky top-24 bg-white rounded-2xl shadow-sm border border-gray-200 p-6 max-h-[calc(100vh-8rem)] overflow-y-auto">
+                <div className="hidden lg:block w-80 sticky top-24 bg-white dark:bg-gray-900 transition-colors rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 max-h-[calc(100vh-8rem)] overflow-y-auto">
                     <PaletteContent />
                 </div>
 
@@ -645,7 +645,7 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
                                 animate={{ x: 0 }}
                                 exit={{ x: '100%' }}
                                 transition={{ type: 'tween' }}
-                                className="fixed right-0 top-0 h-full w-80 bg-white shadow-2xl z-50 p-6 overflow-y-auto lg:hidden"
+                                className="fixed right-0 top-0 h-full w-80 bg-white dark:bg-gray-900 transition-colors shadow-2xl z-50 p-6 overflow-y-auto lg:hidden"
                             >
                                 <PaletteContent />
                             </motion.div>
@@ -657,7 +657,7 @@ const QuizInterface: React.FC<QuizInterfaceProps> = ({ questions, title }) => {
                 <Dialog open={reportOpen} onClose={() => setReportOpen(false)} maxWidth="sm" fullWidth>
                     <DialogTitle>Report Question Issue</DialogTitle>
                     <DialogContent>
-                        <p className="text-gray-600 mb-4 text-sm">
+                        <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">
                             Found an error? Let us know. We'll review it and fix it.
                         </p>
                         <TextField

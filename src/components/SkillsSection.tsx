@@ -42,7 +42,7 @@ const skillCategories = [
 
 const SkillsSection: React.FC = () => {
   return (
-    <section id="skills" className="py-24 bg-gray-50 relative overflow-hidden">
+    <section id="skills" className="py-24 bg-transparent relative z-10 transition-colors overflow-hidden">
       <div className="section-container relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -50,10 +50,10 @@ const SkillsSection: React.FC = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-gray-100">
             Technical <span className="text-blue-600">Expertise</span>
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
             A curated stack of modern technologies I use to build scalable, high-performance cloud solutions and applications.
           </p>
         </motion.div>
@@ -66,13 +66,13 @@ const SkillsSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-2xl p-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 border border-gray-100 group"
+              className="bg-white dark:bg-gray-900 transition-colors rounded-2xl p-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 border border-gray-100 dark:border-gray-800 group"
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className={`p-3 rounded-xl bg-gradient-to-br ${category.color} bg-opacity-10 text-white shadow-md group-hover:scale-110 transition-transform duration-300`}>
                   <category.icon fontSize="medium" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 transition-colors">
                   {category.title}
                 </h3>
               </div>
@@ -81,7 +81,7 @@ const SkillsSection: React.FC = () => {
                 {category.skills.map(skill => (
                   <span
                     key={skill}
-                    className="px-3.5 py-1.5 bg-gray-50 text-gray-700 text-sm font-medium rounded-lg border border-gray-200 group-hover:border-blue-200 group-hover:bg-blue-50/50 transition-all duration-300"
+                    className="px-3.5 py-1.5 bg-gray-50 dark:bg-gray-800/80 transition-colors text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg border border-gray-200 dark:border-gray-700 group-hover:border-blue-200 group-hover:bg-blue-50/50 transition-all duration-300"
                   >
                     {skill}
                   </span>

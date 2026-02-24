@@ -37,7 +37,7 @@ const Internships: React.FC = () => {
       url: "https://drive.google.com/file/d/1qpzCkPtQhF5QOqQbMPxpSRZph6nirwId/view"
     },
     {
-      company: "Tech Solutions Inc.",
+      company: "YBI Foundation",
       role: "Machine Learning Intern",
       duration: "June 2023 - August 2023",
       description: [
@@ -52,7 +52,7 @@ const Internships: React.FC = () => {
   ];
 
   return (
-    <section id="internships" className="py-20 bg-gray-50">
+    <section id="internships" className="py-20 bg-transparent relative z-10">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -80,7 +80,7 @@ const Internships: React.FC = () => {
             >
               💼
             </motion.div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-600 via-purple-400 to-blue-600 bg-clip-text text-transparent inline-block animate-shine">
+            <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-600 via-purple-400 to-blue-600 bg-clip-text pb-2 text-transparent inline-block animate-shine">
               Internship Experience
             </h2>
             <motion.div
@@ -100,7 +100,7 @@ const Internships: React.FC = () => {
               className="h-1 bg-gradient-to-r from-transparent via-purple-500 to-transparent absolute -bottom-2"
             />
           </div>
-          <p className="text-gray-600 max-w-2xl mx-auto mt-5">
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-5">
             Professional experience gained through internships at leading technology companies
           </p>
         </motion.div>
@@ -113,7 +113,7 @@ const Internships: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-purple-300"
+              className="bg-white dark:bg-gray-900 transition-colors rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:border-purple-300"
             >
               <div className="md:grid md:grid-cols-3 gap-6">
                 <div className="relative h-64 md:h-full">
@@ -126,18 +126,18 @@ const Internships: React.FC = () => {
                 <div className="p-6 md:col-span-2">
                   <div className="flex flex-wrap justify-between items-start mb-4">
                     <div>
-                      <h3 className="text-2xl font-bold text-gray-800">
+                      <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200">
                         {internship.role}
                       </h3>
-                      <p className="text-xl text-gray-600 mt-1">
+                      <p className="text-xl text-gray-600 dark:text-gray-400 mt-1">
                         {internship.company}
                       </p>
                     </div>
-                    <span className="inline-block bg-primary px-3 py-1 rounded-full text-sm text-gray-800">
+                    <span className="inline-block bg-blue-50 dark:bg-blue-900/40 border border-blue-100 dark:border-blue-800/50 px-3 py-1 rounded-full text-sm text-blue-700 dark:text-blue-300">
                       {internship.duration}
                     </span>
                   </div>
-                  <ul className="list-disc list-inside space-y-2 text-gray-600 mb-4">
+                  <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 mb-4">
                     {internship.description.map((point, i) => (
                       <li key={i}>{point}</li>
                     ))}

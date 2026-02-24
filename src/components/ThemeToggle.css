@@ -1,0 +1,115 @@
+.theme-toggle-container {
+    position: fixed;
+    top: 0;
+    left: 4%;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-origin: top center;
+    animation: swing 3s ease-in-out infinite alternate;
+}
+
+@keyframes swing {
+    0% {
+        transform: rotate(4deg);
+    }
+
+    100% {
+        transform: rotate(-4deg);
+    }
+}
+
+.wire {
+    width: 2px;
+    height: 60px;
+    background-color: #222;
+    transition: background-color 0.3s;
+}
+
+.wire-dark {
+    background-color: #888;
+}
+
+.bulb-container {
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.bulb-container:hover {
+    transform: scale(1.05);
+}
+
+.bulb-container:active {
+    transform: translateY(15px);
+}
+
+.bulb-socket {
+    width: 14px;
+    height: 18px;
+    background: linear-gradient(to right, #666, #999, #666);
+    border-radius: 4px 4px 0 0;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-bottom: 2px solid #444;
+}
+
+.bulb-socket::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: -2px;
+    width: 18px;
+    height: 4px;
+    background-color: #333;
+    border-radius: 2px;
+}
+
+.socket-ridge {
+    width: 16px;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.bulb {
+    width: 32px;
+    height: 34px;
+    background-color: #fceea7;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    position: relative;
+    top: 0px;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.filament {
+    width: 14px;
+    height: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-bottom: none;
+    border-radius: 50%;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.bulb-container.on .bulb {
+    background-color: #ffe600;
+    box-shadow: 0 0 25px 10px rgba(255, 234, 112, 0.7), 0 0 60px 20px rgba(255, 215, 0, 0.4);
+}
+
+.bulb-container.off .bulb {
+    background-color: #4a4a4a;
+    box-shadow: inset -2px -2px 10px rgba(0, 0, 0, 0.6), inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+.bulb-container.off .filament {
+    border-color: rgba(255, 255, 255, 0.05);
+}

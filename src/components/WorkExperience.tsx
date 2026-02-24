@@ -43,7 +43,7 @@ const WorkExperience: React.FC = () => {
     ];
 
     return (
-        <section id="experience" className="py-20 bg-white">
+        <section id="experience" className="py-20 bg-transparent relative z-10 transition-colors">
             <div className="section-container">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -62,7 +62,7 @@ const WorkExperience: React.FC = () => {
                         >
                             🚀
                         </motion.div>
-                        <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-600 via-purple-400 to-blue-600 bg-clip-text text-transparent inline-block animate-shine">
+                        <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-600 via-purple-400 to-blue-600 bg-clip-text pb-2 text-transparent inline-block animate-shine">
                             Work Experience
                         </h2>
                         <motion.div
@@ -73,7 +73,7 @@ const WorkExperience: React.FC = () => {
                             className="h-1 bg-gradient-to-r from-blue-500 to-purple-600 absolute bottom-0 left-0"
                         />
                     </div>
-                    <p className="text-gray-600 max-w-2xl mx-auto mt-5">
+                    <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-5">
                         My professional journey and contributions in the tech industry
                     </p>
                 </motion.div>
@@ -94,16 +94,16 @@ const WorkExperience: React.FC = () => {
                                     } items-center md:items-start gap-8`}
                             >
                                 {/* Timeline Dot */}
-                                <div className="absolute left-0 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-white border-4 border-blue-500 rounded-full z-10 shadow-lg flex items-center justify-center">
+                                <div className="absolute left-0 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-white dark:bg-gray-900 transition-colors border-4 border-blue-500 rounded-full z-10 shadow-lg flex items-center justify-center">
                                     <div className="w-3 h-3 bg-purple-500 rounded-full" />
                                 </div>
 
                                 {/* Content Card */}
-                                <div className="w-full md:w-1/2 pl-12 md:pl-0 md:px-8">
-                                    <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 hover:border-purple-300 transition-all duration-300 hover:shadow-xl relative group">
+                                <div className="w-full md:w-1/2 pl-12 pr-4 md:px-8">
+                                    <div className="bg-white dark:bg-gray-900 transition-colors p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 hover:border-purple-300 transition-all duration-300 hover:shadow-xl relative group">
                                         {/* Arrow for Desktop */}
                                         <div
-                                            className={`hidden md:block absolute top-6 w-4 h-4 bg-white border-t border-l border-gray-200 transform rotate-45 ${index % 2 === 0
+                                            className={`hidden md:block absolute top-6 w-4 h-4 bg-white dark:bg-gray-900 transition-colors border-t border-l border-gray-200 dark:border-gray-700 transform rotate-45 ${index % 2 === 0
                                                 ? '-left-2 group-hover:border-purple-300'
                                                 : '-right-2 border-t-0 border-l-0 border-b border-r group-hover:border-purple-300'
                                                 } transition-colors duration-300`}
@@ -111,7 +111,7 @@ const WorkExperience: React.FC = () => {
 
                                         <div className="flex items-center gap-3 mb-2">
                                             <WorkIcon className="text-blue-600" />
-                                            <h3 className="text-xl font-bold text-gray-800">{exp.role}</h3>
+                                            <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">{exp.role}</h3>
                                         </div>
 
                                         <div className="flex items-center gap-2 mb-3">
@@ -129,7 +129,7 @@ const WorkExperience: React.FC = () => {
                                             )}
                                         </div>
 
-                                        <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-4">
+                                        <div className="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400 mb-4">
                                             <div className="flex items-center gap-1">
                                                 <CalendarTodayIcon fontSize="small" />
                                                 <span>{exp.duration}</span>
@@ -140,7 +140,7 @@ const WorkExperience: React.FC = () => {
                                             </div>
                                         </div>
 
-                                        <ul className="list-disc list-inside space-y-2 text-gray-600 text-sm">
+                                        <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 text-sm">
                                             {exp.description.map((desc, i) => (
                                                 <li key={i}>{desc}</li>
                                             ))}

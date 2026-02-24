@@ -66,11 +66,11 @@ const AWSCCPMockTests: React.FC = () => {
     };
 
     return (
-        <section className="py-20 bg-white min-h-screen pt-24 relative">
+        <section className="py-20 bg-white dark:bg-gray-900 transition-colors min-h-screen pt-24 relative">
             <div className="section-container">
                 <button
                     onClick={() => navigate('/mock-tests')}
-                    className="flex items-center gap-2 text-gray-600 hover:text-blue-600 mb-8 transition-colors"
+                    className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 mb-8 transition-colors"
                 >
                     <ArrowBackIcon /> Back to Mock Tests
                 </button>
@@ -80,10 +80,10 @@ const AWSCCPMockTests: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className="mb-8 text-center"
                 >
-                    <h2 className="text-3xl md:text-4xl font-bold mb-3 text-gray-800">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-3 text-gray-800 dark:text-gray-200">
                         AWS Certified Cloud Practitioner
                     </h2>
-                    <p className="text-gray-600 mb-6">
+                    <p className="text-gray-600 dark:text-gray-400 mb-6">
                         Comprehensive resources to help you ace your exam.
                     </p>
 
@@ -98,7 +98,7 @@ const AWSCCPMockTests: React.FC = () => {
                             onClick={() => setActiveTab('tests')}
                             className={`px-6 py-3 rounded-xl font-bold transition-all ${activeTab === 'tests'
                                     ? 'bg-blue-600 text-white shadow-lg scale-105'
-                                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                    : 'bg-gray-100 dark:bg-gray-800 transition-colors text-gray-600 dark:text-gray-400 hover:bg-gray-200'
                                 }`}
                         >
                             Mock Tests
@@ -107,7 +107,7 @@ const AWSCCPMockTests: React.FC = () => {
                             onClick={() => setActiveTab('materials')}
                             className={`px-6 py-3 rounded-xl font-bold transition-all ${activeTab === 'materials'
                                     ? 'bg-blue-600 text-white shadow-lg scale-105'
-                                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                    : 'bg-gray-100 dark:bg-gray-800 transition-colors text-gray-600 dark:text-gray-400 hover:bg-gray-200'
                                 }`}
                         >
                             Study Materials
@@ -128,11 +128,11 @@ const AWSCCPMockTests: React.FC = () => {
                             {mockTests.map((test) => (
                                 <motion.div
                                     key={test.id}
-                                    className="bg-gray-50 p-6 rounded-xl border border-gray-200 hover:border-blue-300 transition-all flex flex-col sm:flex-row justify-between items-center gap-4"
+                                    className="bg-gray-50 dark:bg-gray-800/80 transition-colors p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-blue-300 transition-all flex flex-col sm:flex-row justify-between items-center gap-4"
                                 >
                                     <div>
-                                        <h3 className="text-xl font-bold text-gray-800">{test.name}</h3>
-                                        <p className="text-gray-600 text-sm mt-1">
+                                        <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">{test.name}</h3>
+                                        <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
                                             {test.questions} Questions • {test.duration}
                                         </p>
                                     </div>
@@ -157,7 +157,7 @@ const AWSCCPMockTests: React.FC = () => {
                             {studyMaterials.map((material, idx) => (
                                 <div
                                     key={idx}
-                                    className="bg-white p-5 rounded-xl border border-gray-200 hover:shadow-md transition-all flex items-center justify-between group"
+                                    className="bg-white dark:bg-gray-900 transition-colors p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-md transition-all flex items-center justify-between group"
                                 >
                                     <div className="flex items-center gap-4">
                                         <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${material.type === 'image' ? 'bg-purple-100 text-purple-600' : 'bg-blue-100 text-blue-600'
@@ -165,10 +165,10 @@ const AWSCCPMockTests: React.FC = () => {
                                             {material.type === 'image' ? <ImageIcon /> : <DescriptionIcon />}
                                         </div>
                                         <div>
-                                            <h3 className="font-bold text-gray-800 group-hover:text-blue-600 transition-colors">
+                                            <h3 className="font-bold text-gray-800 dark:text-gray-200 group-hover:text-blue-600 transition-colors">
                                                 {material.name}
                                             </h3>
-                                            <p className="text-xs text-gray-500 uppercase tracking-wider mt-0.5">
+                                            <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider mt-0.5">
                                                 {material.type.toUpperCase()}
                                             </p>
                                         </div>
@@ -178,7 +178,7 @@ const AWSCCPMockTests: React.FC = () => {
                                         {material.type === 'image' && (
                                             <button
                                                 onClick={() => setPreviewImage(`/study-materials/${material.file}`)}
-                                                className="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                                                className="p-2 text-gray-500 dark:text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                                                 title="Preview"
                                             >
                                                 <VisibilityIcon />
@@ -187,7 +187,7 @@ const AWSCCPMockTests: React.FC = () => {
                                         <a
                                             href={`/study-materials/${material.file}`}
                                             download
-                                            className="p-2 text-gray-500 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors"
+                                            className="p-2 text-gray-500 dark:text-gray-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors"
                                             title="Download"
                                         >
                                             <DownloadIcon />

@@ -62,24 +62,24 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ onClose }) => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.8 }}
-          className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl relative"
+          className="bg-white dark:bg-gray-900 transition-colors rounded-2xl p-8 max-w-md w-full shadow-2xl relative"
         >
           <button
             onClick={handleSkip}
-            className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors"
+            className="absolute top-4 right-4 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:text-gray-300 transition-colors"
             disabled={isSubmitting}
           >
             <CloseIcon />
           </button>
 
-          <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center">Welcome!</h2>
-          <p className="text-gray-600 mb-8">
+          <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-200 text-center">Welcome!</h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-8">
             I'm excited to show you my portfolio. Would you like to introduce yourself?
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Your Name (optional)
               </label>
               <input
@@ -104,7 +104,7 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ onClose }) => {
               <button
                 type="button"
                 onClick={handleSkip}
-                className="flex-1 bg-gray-100 text-gray-800 px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition-all duration-300 disabled:opacity-50"
+                className="flex-1 bg-gray-100 dark:bg-gray-800 transition-colors text-gray-800 dark:text-gray-200 px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition-all duration-300 disabled:opacity-50"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? 'Please wait...' : 'Skip'}

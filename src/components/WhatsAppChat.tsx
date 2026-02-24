@@ -39,7 +39,7 @@ const WhatsAppChat: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.3 }}
             transition={{ duration: 0.3 }}
-            className="fixed bottom-24 right-6 z-50 bg-white rounded-xl shadow-2xl w-[300px] overflow-hidden"
+            className="fixed bottom-24 right-6 z-50 bg-white dark:bg-gray-900 transition-colors rounded-xl shadow-2xl w-[300px] overflow-hidden"
           >
             {/* Header */}
             <div className="bg-green-500 p-4 flex justify-between items-center">
@@ -57,8 +57,8 @@ const WhatsAppChat: React.FC = () => {
             </div>
 
             {/* Chat Content */}
-            <div className="p-4 bg-gray-50">
-              <p className="text-gray-600 mb-4">
+            <div className="p-4 bg-gray-50 dark:bg-gray-800/80 transition-colors">
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
                 Hi there! 👋 Feel free to message me on WhatsApp. I'll get back to you as soon as possible.
               </p>
               <button

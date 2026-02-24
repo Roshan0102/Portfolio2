@@ -68,7 +68,7 @@ const Education: React.FC = () => {
   };
 
   return (
-    <section id="education" className="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section id="education" className="py-20 bg-transparent relative z-10 transition-colors duration-500">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -84,8 +84,10 @@ const Education: React.FC = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="relative inline-block"
           >
-            <span className="absolute -top-10 left-1/2 transform -translate-x-1/2 text-6xl opacity-10">🎓</span>
-            <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-600 via-purple-400 to-blue-600 bg-clip-text text-transparent inline-block animate-shine">
+            <span className="absolute -top-12 left-1/2 transform -translate-x-1/2 opacity-30 dark:opacity-20">
+              <SchoolIcon style={{ fontSize: 80 }} className="text-blue-600 dark:text-blue-400" />
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-600 via-purple-400 to-blue-600 bg-clip-text pb-2 text-transparent inline-block animate-shine">
               Education Journey
             </h2>
             <motion.div
@@ -96,7 +98,7 @@ const Education: React.FC = () => {
               className="w-20 mx-auto mt-2 rounded-full bg-gradient-to-r from-blue-400 to-purple-500"
             />
           </motion.div>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg mt-5">
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg mt-5">
             My academic path in technology and innovation
           </p>
         </motion.div>
@@ -117,7 +119,7 @@ const Education: React.FC = () => {
               {index !== education.length - 1 && (
                 <div className="absolute left-8 top-20 w-1 h-24 bg-gradient-to-b from-blue-400 to-purple-400" />
               )}
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 hover:border-purple-300">
+              <div className="bg-white dark:bg-gray-900 transition-colors rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 dark:border-gray-700 hover:border-purple-300">
                 <div className="flex flex-col md:flex-row gap-6">
                   <motion.div
                     variants={iconVariants}
@@ -127,23 +129,23 @@ const Education: React.FC = () => {
                   </motion.div>
                   <div className="flex-1 space-y-4">
                     <div>
-                      <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                      <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-2">
                         {edu.degree}
                       </h3>
-                      <p className="text-xl text-gray-600">
+                      <p className="text-xl text-gray-600 dark:text-gray-400">
                         {edu.institution}
                       </p>
                     </div>
                     <div className="flex flex-wrap gap-4">
-                      <div className="flex items-center gap-2 text-gray-600">
+                      <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                         <TimelineIcon className="text-blue-500" />
                         <span>{edu.duration}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-gray-600">
+                      <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                         <LocationOnIcon className="text-purple-500" />
                         <span>{edu.location}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-gray-600">
+                      <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                         <StarIcon className="text-yellow-500" />
                         <span>{edu.score}</span>
                       </div>

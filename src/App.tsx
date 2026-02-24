@@ -12,6 +12,8 @@ import LinkedInPosts from './components/LinkedInPosts';
 import Footer from './components/Footer';
 import WelcomeModal from './components/WelcomeModal';
 import AIChat from './components/AIChat';
+import AnimatedBackground from './components/AnimatedBackground';
+import ThemeToggle from './components/ThemeToggle';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import MockTestLanding from './components/mock-tests/MockTestLanding';
 import AWSCCPMockTests from './components/mock-tests/AWSCCPMockTests';
@@ -38,8 +40,10 @@ const Content: React.FC = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-primary"
+      className="min-h-screen bg-transparent transition-colors duration-500"
     >
+      <AnimatedBackground />
+      <ThemeToggle />
       {!isMockTest && showModal && <WelcomeModal onClose={handleModalClose} />}
 
       <AnimatePresence>
@@ -68,8 +72,8 @@ const Content: React.FC = () => {
             <Skills />
             <WorkExperience />
             <Projects />
-            <Education />
             <Certifications />
+            <Education />
             <Internships />
             <LinkedInPosts />
           </>

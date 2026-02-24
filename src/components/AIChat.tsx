@@ -85,18 +85,18 @@ const AIChat: React.FC = () => {
     };
 
     return (
-        <section id="ask-ai" className="min-h-screen flex flex-col justify-center py-20 bg-white relative overflow-hidden">
+        <section id="ask-ai" className="min-h-screen flex flex-col justify-center py-20 bg-transparent relative z-10 transition-colors overflow-hidden">
             <div className="section-container max-w-4xl mx-auto px-4 relative z-10">
 
                 {/* Header Branding */}
                 <div className="text-center mb-8">
                     <div className="flex items-center justify-center gap-2 mb-2">
                         <AutoAwesomeIcon className="text-purple-600" fontSize="large" />
-                        <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-400 to-blue-600 bg-clip-text text-transparent animate-shine">
+                        <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-400 to-blue-600 bg-clip-text pb-2 text-transparent animate-shine">
                             Ask AI
                         </span>
                     </div>
-                    <p className="text-gray-500">
+                    <p className="text-gray-500 dark:text-gray-400">
                         Analyze my profile against your job description or ask about my skills.
                     </p>
                 </div>
@@ -120,14 +120,14 @@ const AIChat: React.FC = () => {
                                     {/* Avatar */}
                                     <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center shadow-sm ${msg.role === 'assistant'
                                         ? 'bg-gradient-to-br from-blue-100 to-purple-100 text-purple-600'
-                                        : 'bg-gray-100 text-gray-600'
+                                        : 'bg-gray-100 dark:bg-gray-800 transition-colors text-gray-600 dark:text-gray-400'
                                         }`}>
                                         {msg.role === 'assistant' ? <AutoAwesomeIcon fontSize="small" /> : <span className="font-bold">You</span>}
                                     </div>
 
                                     {/* Message Bubble */}
                                     <div className={`flex-1 p-6 rounded-2xl shadow-sm border ${msg.role === 'assistant'
-                                        ? 'bg-white border-gray-100 text-gray-800'
+                                        ? 'bg-white dark:bg-gray-900 transition-colors border-gray-100 dark:border-gray-800 text-gray-800 dark:text-gray-200'
                                         : 'bg-blue-50 border-blue-100 text-blue-900'
                                         }`}>
                                         <div className="prose prose-sm max-w-none whitespace-pre-wrap leading-relaxed">
@@ -136,10 +136,10 @@ const AIChat: React.FC = () => {
 
                                         {/* Assistant Actions */}
                                         {msg.role === 'assistant' && (
-                                            <div className="mt-4 flex items-center gap-2 pt-4 border-t border-gray-100">
+                                            <div className="mt-4 flex items-center gap-2 pt-4 border-t border-gray-100 dark:border-gray-800">
                                                 <button
                                                     onClick={() => handleCopy(msg.content)}
-                                                    className="flex items-center gap-1 text-xs text-gray-500 hover:text-purple-600 transition-colors"
+                                                    className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400 hover:text-purple-600 transition-colors"
                                                 >
                                                     {copied ? <CheckIcon fontSize="small" /> : <ContentCopyIcon fontSize="small" />}
                                                     {copied ? 'Copied' : 'Copy response'}
@@ -156,7 +156,7 @@ const AIChat: React.FC = () => {
 
                 {/* Search Bar Container */}
                 <div className="rounded-2xl shadow-xl bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 p-[2px] mb-8 transition-all duration-300 hover:shadow-2xl hover:scale-[1.01]">
-                    <div className="bg-white rounded-2xl">
+                    <div className="bg-white dark:bg-gray-900 transition-colors rounded-2xl">
                         <form onSubmit={handleSubmit} className="relative flex items-center">
                             <div className="absolute left-4 text-gray-400">
                                 <AutoAwesomeIcon />
@@ -166,14 +166,14 @@ const AIChat: React.FC = () => {
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 placeholder="Paste a JD or ask: 'Do you have experience with AWS?'"
-                                className="w-full py-4 pl-12 pr-14 text-lg text-gray-700 bg-transparent border-none focus:ring-0 placeholder-gray-400 rounded-2xl focus:outline-none"
+                                className="w-full py-4 pl-12 pr-14 text-lg text-gray-700 dark:text-gray-300 bg-transparent border-none focus:ring-0 placeholder-gray-400 rounded-2xl focus:outline-none"
                             />
                             <button
                                 type="submit"
                                 disabled={isLoading || !input.trim()}
                                 className={`absolute right-2 p-2 rounded-xl transition-all duration-200 ${input.trim()
                                     ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md hover:shadow-lg transform hover:scale-105'
-                                    : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                    : 'bg-gray-100 dark:bg-gray-800 transition-colors text-gray-400 cursor-not-allowed'
                                     }`}
                             >
                                 {isLoading ? (
@@ -202,7 +202,7 @@ const AIChat: React.FC = () => {
                             <button
                                 key={i}
                                 onClick={() => setInput(suggestion)}
-                                className="p-4 text-sm text-gray-600 bg-gray-50 rounded-xl border border-gray-100 hover:border-purple-200 hover:bg-purple-50 transition-all text-left"
+                                className="p-4 text-sm text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800/80 transition-colors rounded-xl border border-gray-100 dark:border-gray-800 hover:border-purple-200 hover:bg-purple-50 transition-all text-left"
                             >
                                 {suggestion}
                             </button>

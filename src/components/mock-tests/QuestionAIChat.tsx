@@ -80,7 +80,7 @@ Please answer the user's question specifically about this AWS concept. Be concis
     };
 
     return (
-        <div className="mt-8 border-t border-gray-100 pt-6">
+        <div className="mt-8 border-t border-gray-100 dark:border-gray-800 pt-6">
             {!isOpen ? (
                 <button
                     onClick={() => setIsOpen(true)}
@@ -91,14 +91,14 @@ Please answer the user's question specifically about this AWS concept. Be concis
                     </div>
                     <div className="text-left">
                         <div className="font-bold">Ask AI Tutor</div>
-                        <div className="text-sm text-gray-500">Have doubts? Get instant clarification on this question.</div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400">Have doubts? Get instant clarification on this question.</div>
                     </div>
                 </button>
             ) : (
                 <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden"
+                    className="bg-gray-50 dark:bg-gray-800/80 transition-colors rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden"
                 >
                     {/* Header */}
                     <div className="bg-blue-600 p-4 flex justify-between items-center text-white">
@@ -115,16 +115,16 @@ Please answer the user's question specifically about this AWS concept. Be concis
                     </div>
 
                     {/* Chat Area */}
-                    <div className="h-64 overflow-y-auto p-4 space-y-4 bg-gray-50">
+                    <div className="h-64 overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-gray-800/80 transition-colors">
                         {messages.length === 0 && (
-                            <div className="text-center text-gray-500 mt-4">
+                            <div className="text-center text-gray-500 dark:text-gray-400 mt-4">
                                 <p className="mb-4">Hi! I can help you understand this question better.</p>
                                 <div className="flex flex-wrap gap-2 justify-center">
                                     {suggestedPrompts.map((prompt, idx) => (
                                         <button
                                             key={idx}
                                             onClick={() => handleSend(prompt)}
-                                            className="text-xs bg-white border border-blue-200 text-blue-600 px-3 py-1.5 rounded-full hover:bg-blue-50 transition-colors"
+                                            className="text-xs bg-white dark:bg-gray-900 transition-colors border border-blue-200 text-blue-600 px-3 py-1.5 rounded-full hover:bg-blue-50 transition-colors"
                                         >
                                             {prompt}
                                         </button>
@@ -141,7 +141,7 @@ Please answer the user's question specifically about this AWS concept. Be concis
                                 <div
                                     className={`max-w-[85%] p-3 rounded-lg text-sm ${msg.role === 'user'
                                             ? 'bg-blue-600 text-white rounded-br-none'
-                                            : 'bg-white border border-gray-200 text-gray-800 rounded-bl-none shadow-sm'
+                                            : 'bg-white dark:bg-gray-900 transition-colors border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 rounded-bl-none shadow-sm'
                                         }`}
                                 >
                                     {msg.content}
@@ -150,7 +150,7 @@ Please answer the user's question specifically about this AWS concept. Be concis
                         ))}
                         {isLoading && (
                             <div className="flex justify-start">
-                                <div className="bg-white border border-gray-200 p-3 rounded-lg rounded-bl-none shadow-sm">
+                                <div className="bg-white dark:bg-gray-900 transition-colors border border-gray-200 dark:border-gray-700 p-3 rounded-lg rounded-bl-none shadow-sm">
                                     <CircularProgress size={20} className="text-blue-600" />
                                 </div>
                             </div>
@@ -159,7 +159,7 @@ Please answer the user's question specifically about this AWS concept. Be concis
                     </div>
 
                     {/* Input Area */}
-                    <div className="p-3 bg-white border-t border-gray-200 flex gap-2">
+                    <div className="p-3 bg-white dark:bg-gray-900 transition-colors border-t border-gray-200 dark:border-gray-700 flex gap-2">
                         <input
                             type="text"
                             value={input}

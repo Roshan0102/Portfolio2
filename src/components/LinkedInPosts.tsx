@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { fetchLinkedInPosts, LinkedInPost } from '../services/linkedinService';
+import { linkedinPostsData, LinkedInPost } from '../data/linkedinPosts';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const LinkedInPosts: React.FC = () => {
@@ -9,14 +9,9 @@ const LinkedInPosts: React.FC = () => {
     const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set());
 
     useEffect(() => {
-        const loadPosts = async () => {
-            setLoading(true);
-            const fetchedPosts = await fetchLinkedInPosts();
-            setPosts(fetchedPosts);
-            setLoading(false);
-        };
-
-        loadPosts();
+        // Now using static local data instead of fetching
+        setPosts(linkedinPostsData);
+        setLoading(false);
     }, []);
 
     const toggleFlip = (postId: string) => {
@@ -37,7 +32,7 @@ const LinkedInPosts: React.FC = () => {
     };
 
     return (
-        <section id="linkedin-posts" className="py-16 bg-white">
+        <section id="linkedin-posts" className="py-16 bg-transparent relative z-10 transition-colors">
             <div className="section-container">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -48,11 +43,11 @@ const LinkedInPosts: React.FC = () => {
                 >
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">
                         Latest{' '}
-                        <span className="bg-gradient-to-r from-blue-600 via-purple-400 to-blue-600 bg-clip-text text-transparent animate-shine">
+                        <span className="bg-gradient-to-r from-blue-600 via-purple-400 to-blue-600 bg-clip-text pb-2 text-transparent animate-shine">
                             LinkedIn Posts
                         </span>
                     </h2>
-                    <p className="text-gray-600 max-w-2xl mx-auto">
+                    <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                         Stay updated with my latest insights, projects, and thoughts on cloud computing, AI, and technology
                     </p>
                 </motion.div>
@@ -79,9 +74,8 @@ const LinkedInPosts: React.FC = () => {
                                     transition={{ duration: 0.6, type: "spring" }}
                                     style={{ transformStyle: 'preserve-3d' }}
                                 >
-                                    {/* Front of Card */}
                                     <div
-                                        className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl shadow-lg p-6 flex flex-col border border-gray-200 hover:border-purple-300 transition-all duration-300"
+                                        className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800/90 dark:to-gray-900/90 backdrop-blur-md rounded-xl shadow-lg p-6 flex flex-col border border-gray-200 dark:border-gray-700 hover:border-purple-300 transition-all duration-300"
                                         style={{
                                             backfaceVisibility: 'hidden',
                                             WebkitBackfaceVisibility: 'hidden',
@@ -89,7 +83,7 @@ const LinkedInPosts: React.FC = () => {
                                     >
                                         {/* Post Image or Creative Placeholder */}
                                         {post.images && post.images.length > 0 ? (
-                                            <div className="mb-6 rounded-lg overflow-hidden bg-gray-200 h-56 shrink-0">
+                                            <div className="mb-6 rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-700/50 h-56 shrink-0">
                                                 <img
                                                     src={post.images[0]}
                                                     alt="Post"
@@ -97,16 +91,16 @@ const LinkedInPosts: React.FC = () => {
                                                 />
                                             </div>
                                         ) : (
-                                            <div className="mb-6 rounded-lg overflow-hidden bg-gradient-to-br from-blue-100/50 to-purple-100/50 h-56 shrink-0 flex items-center justify-center border-2 border-dashed border-blue-100">
+                                            <div className="mb-6 rounded-lg overflow-hidden bg-gradient-to-br from-blue-100/50 to-purple-100/50 dark:from-blue-900/20 dark:to-purple-900/20 h-56 shrink-0 flex items-center justify-center border-2 border-dashed border-blue-100 dark:border-blue-800/50">
                                                 <LinkedInIcon className="text-blue-300" style={{ fontSize: 96 }} />
                                             </div>
                                         )}
                                         {/* Post Text */}
-                                        <p className="text-gray-700 mb-4 flex-grow overflow-hidden text-sm leading-relaxed">
+                                        <p className="text-gray-700 dark:text-gray-300 mb-4 flex-grow overflow-hidden text-sm leading-relaxed">
                                             {truncateText(post.text, 350)}
                                         </p>
 
-                                        <div className="mt-auto pt-4 border-t border-gray-200 text-center text-xs text-gray-500 font-medium uppercase tracking-wider">
+                                        <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700 text-center text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wider">
                                             Click to flip to view post
                                         </div>
                                     </div>
@@ -129,7 +123,7 @@ const LinkedInPosts: React.FC = () => {
                                             href={post.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors duration-300"
+                                            className="bg-white dark:bg-gray-900 transition-colors text-blue-600 dark:text-blue-400 border border-transparent dark:border-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 dark:hover:bg-gray-800 transition-colors duration-300"
                                             onClick={(e) => e.stopPropagation()}
                                         >
                                             Open on LinkedIn
@@ -149,7 +143,7 @@ const LinkedInPosts: React.FC = () => {
                             href="https://www.linkedin.com/in/roshan-j-628672203/recent-activity/all/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-8 py-3 bg-white text-blue-600 font-semibold rounded-full border-2 border-blue-100 hover:border-blue-600 hover:bg-blue-50 transition-all duration-300 shadow-sm hover:shadow-md"
+                            className="inline-flex items-center gap-2 px-8 py-3 bg-white dark:bg-gray-900 transition-colors text-blue-600 font-semibold rounded-full border-2 border-blue-100 hover:border-blue-600 hover:bg-blue-50 transition-all duration-300 shadow-sm hover:shadow-md"
                         >
                             <LinkedInIcon fontSize="small" />
                             See More Posts
@@ -159,7 +153,7 @@ const LinkedInPosts: React.FC = () => {
 
                 {!loading && posts.length === 0 && (
                     <div className="text-center py-20">
-                        <p className="text-gray-600">No posts available at the moment.</p>
+                        <p className="text-gray-600 dark:text-gray-400">No posts available at the moment.</p>
                     </div>
                 )}
             </div>

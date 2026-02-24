@@ -87,7 +87,7 @@ const Projects: React.FC = () => {
   const displayedProjects = showAll ? projects : projects.slice(0, 3);
 
   return (
-    <section id="projects" className="py-20 bg-gray-50">
+    <section id="projects" className="py-20 bg-transparent relative z-10 transition-colors duration-500">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -97,20 +97,20 @@ const Projects: React.FC = () => {
           className="text-center mb-12"
         >
           <div className="relative inline-block">
-            <div className="absolute -left-8 -right-8 top-1/2 transform -translate-y-1/2 h-0.5 bg-gray-200"></div>
+
             <motion.div
               initial={{ scale: 0, rotate: -5 }}
               whileInView={{ scale: 1, rotate: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-              className="relative z-10 px-4 bg-gray-50"
+              className="relative z-10 px-4 bg-transparent transition-colors"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-600 via-purple-400 to-blue-600 bg-clip-text text-transparent inline-block animate-shine">
+              <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-blue-600 via-purple-400 to-blue-600 bg-clip-text pb-2 text-transparent inline-block animate-shine">
                 Featured Projects
               </h2>
             </motion.div>
           </div>
-          <p className="text-gray-600 max-w-2xl mx-auto mt-5">
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-5">
             Discover my latest software development projects and contributions
           </p>
         </motion.div>
@@ -125,10 +125,10 @@ const Projects: React.FC = () => {
                 viewport={{ once: true }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-purple-300"
+                className="bg-white dark:bg-gray-900 transition-colors rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:border-purple-300"
               >
                 <div className="md:grid md:grid-cols-2 gap-6">
-                  <div className="relative h-64 md:h-full bg-gray-100 flex items-center justify-center">
+                  <div className="relative h-64 md:h-full bg-gray-100 dark:bg-gray-800 transition-colors flex items-center justify-center">
                     {project.image ? (
                       <img
                         src={project.image}
@@ -143,8 +143,8 @@ const Projects: React.FC = () => {
                     )}
                   </div>
                   <div className="p-6">
-                    <h3 className="text-2xl font-bold mb-4 text-gray-800">{project.title}</h3>
-                    <ul className="list-disc list-inside mb-4 text-gray-600 space-y-2">
+                    <h3 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">{project.title}</h3>
+                    <ul className="list-disc list-inside mb-4 text-gray-600 dark:text-gray-400 space-y-2">
                       {project.description.map((point, i) => (
                         <li key={i}>{point}</li>
                       ))}
@@ -153,7 +153,7 @@ const Projects: React.FC = () => {
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 bg-primary rounded-full text-sm text-gray-800"
+                          className="px-3 py-1 bg-primary dark:bg-gray-800 rounded-full text-sm text-gray-800 dark:text-gray-300"
                         >
                           {tech}
                         </span>
@@ -186,7 +186,7 @@ const Projects: React.FC = () => {
           <div className="text-center mt-12">
             <button
               onClick={() => setShowAll(!showAll)}
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-white border border-gray-200 text-gray-800 font-semibold hover:bg-gray-50 hover:border-blue-300 transition-all duration-300 shadow-sm hover:shadow-md"
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-white dark:bg-gray-900 transition-colors border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold hover:bg-gray-50 dark:bg-gray-800/80 transition-colors hover:border-blue-300 transition-all duration-300 shadow-sm hover:shadow-md"
             >
               {showAll ? (
                 <>
